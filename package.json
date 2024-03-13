@@ -1,0 +1,26 @@
+{
+  "name": "cinema_reservation",
+  "version": "1.0.0",
+  "description": "Applicazione per la gestione della prenotazione delle sale di un cinema",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tasso01/CinemaReservation.git"
+  },
+  "keywords": [
+    "cinema",
+    "resrevation"
+  ],
+  "author": "Francesco Tasso / Alessandro Canuti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tasso01/CinemaReservation/issues"
+  },
+  "homepage": "https://github.com/tasso01/CinemaReservation#readme",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}
