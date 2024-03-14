@@ -1,4 +1,4 @@
-const{DataTypes, Model} = requeire('sequelize');
+const{DataTypes, Model} = require('sequelize');
 const sequelize = require('../database/db');
 
 class CinemaHall extends Model {}
