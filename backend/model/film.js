@@ -1,9 +1,9 @@
 const{DataTypes, Model} = requeire('sequelize');
 const sequelize = require('../database/db');
 
-class CinemaHall extends Model {}
+class Film extends Model{}
 
-CinemaHall.init(
+Film.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,21 +11,28 @@ CinemaHall.init(
             allowNull: false,
             primaryKey: true,
         },
-        name: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true,
         },
-        capacity: {
+        producer: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        duration: {
             type: DataTypes.INTEGER,
             allowNull: false,
-        }
+        },
     },
     {
         sequelize,
-        modelName: "CinemaHall",
+        modelName: "Film",
         timestamps: false,
     }
-);
+)
 
-module.export = CinemaHall;
+module.export = Film;

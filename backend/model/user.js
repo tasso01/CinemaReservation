@@ -1,9 +1,9 @@
 const{DataTypes, Model} = requeire('sequelize');
 const sequelize = require('../database/db');
 
-class CinemaHall extends Model {}
+class User extends Model{}
 
-CinemaHall.init(
+User.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,21 +11,26 @@ CinemaHall.init(
             allowNull: false,
             primaryKey: true,
         },
-        name: {
+        username: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
         },
-        capacity: {
-            type: DataTypes.INTEGER,
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+        },
+        password: {
+            type: DataTypes.STRING,
             allowNull: false,
         }
     },
     {
         sequelize,
-        modelName: "CinemaHall",
+        modelName: "User",
         timestamps: false,
     }
 );
 
-module.export = CinemaHall;
+module.export = User;

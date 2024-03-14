@@ -1,9 +1,9 @@
 const{DataTypes, Model} = requeire('sequelize');
 const sequelize = require('../database/db');
 
-class CinemaHall extends Model {}
+class Seat extends Model {}
 
-CinemaHall.init(
+Seat.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,21 +11,29 @@ CinemaHall.init(
             allowNull: false,
             primaryKey: true,
         },
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-        },
-        capacity: {
+        number: {
             type: DataTypes.INTEGER,
             allowNull: false,
-        }
+        },
+        state: {
+            type: DataTypes.BOOLEAN,
+            default: false,
+        },
+        cinemaHallId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'CinemaHall',
+                key: 'id',
+            },
+            onDelete: 'CASCADE'
+        },
     },
     {
         sequelize,
-        modelName: "CinemaHall",
+        modelName: "Seat",
         timestamps: false,
     }
 );
 
-module.export = CinemaHall;
+module.export = Seat;
