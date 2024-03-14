@@ -1,7 +1,7 @@
 module.exports = {
     username: 'postgres',
     password: 'PostgreIds',
-    database: 'CinemaReservation',
+    database: 'CinemaReservationDB',
     host: 'localhost',
     dialect: 'postgres',
     port: 5432,
