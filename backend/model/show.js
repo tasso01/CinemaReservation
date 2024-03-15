@@ -12,12 +12,16 @@ Show.init(
             primaryKey: true,
         },
         date: {
-            type: DataTypes.DATETIME,
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
+        time: {
+            type: DataTypes.TIME,
             allowNull: false,
         },
         cinemaHallId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: 'CinemaHall',
                 key: 'id',
@@ -26,7 +30,7 @@ Show.init(
         },
         filmId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: 'Film',
                 key: 'id',
@@ -39,6 +43,7 @@ Show.init(
         sequelize,
         modelName: "Show",
         timestamps: false,
+        force: true,
     }
 );
 

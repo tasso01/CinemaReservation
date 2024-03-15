@@ -1,9 +1,9 @@
 const CinemaHall = require('./cinemaHall');
-const Booking = require('./booking');
 const User = require('./user');
+const Film = require('./film');
 const Seat = require('./seat');
 const Show = require('./show');
-const Film = require('./film');
+const Booking = require('./booking');
 
 function createAssociations(){
 

@@ -17,7 +17,7 @@ Booking.init(
         },
         userId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: 'User',
                 key: 'id',
@@ -26,7 +26,7 @@ Booking.init(
         },
         showId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: 'Show',
                 key: 'id',
@@ -35,7 +35,7 @@ Booking.init(
         },
         seatId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: 'Seat',
                 key: 'id',
@@ -47,6 +47,7 @@ Booking.init(
         sequelize,
         modelName: "Booking",
         timestamps: false,
+        force: true,
     }
 );
 

@@ -21,7 +21,7 @@ Seat.init(
         },
         cinemaHallId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: 'CinemaHall',
                 key: 'id',
@@ -33,7 +33,7 @@ Seat.init(
         sequelize,
         modelName: "Seat",
         timestamps: false,
+        force: true,
     }
 );
-
 module.export = Seat;

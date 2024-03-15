@@ -25,6 +25,7 @@ CinemaHall.init(
         sequelize,
         modelName: "CinemaHall",
         timestamps: false,
+        force: true,
     }
 );
 

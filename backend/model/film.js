@@ -32,6 +32,7 @@ Film.init(
         sequelize,
         modelName: "Film",
         timestamps: false,
+        force: true,
     }
 )
 
