@@ -1,10 +1,7 @@
-const db = require('./database/db');
-const createAssociations = require('./model/associations')
+const sequelize = require('./database/connection');
+const associations = require('./models/associations');
+
+sequelize.sync({ force: true });
 
 
 
-db.sync()
-    .then(() => {console.log("Connected.")})
-    .catch((err) => {console.log("Not Connected: " + err.message)});
-    
-createAssociations();
