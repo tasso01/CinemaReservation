@@ -1,26 +1,24 @@
-const User = require('./user');
+const Booking = require('./booking');
 const Film = require('./film');
 const Hall = require('./hall');
 const Seat = require('./seat');
 const Show = require('./show');
-const Booking = require('./booking');
+const User = require('./user');
 
-function createAssociations(){
-    Hall.hasMany(Seat, {foreignKey: 'hallId'});
-    Seat.belongsTo(Hall, {foreignKey: 'hallId'});
+Hall.hasMany(Seat);
+Seat.belongsTo(Hall);
 
-    Show.hasMany(Hall, {foreignKey: 'hallId'});
-    Hall.belongsTo(Show, {foreignKey: 'hallId'});
+Hall.hasMany(Show);
+Show.belongsTo(Hall);
 
-    Film.hasMany(Show, {foreignKey: 'filmId'});
-    Show.belongsTo(Film, {foreignKey: 'filmId'});
+Film.hasMany(Show);
+Show.belongsTo(Film);
 
-    User.hasMany(Booking, {foreignKey: 'userId'});
-    Booking.belongsTo(User, {foreignKey: 'userId'});
+User.hasMany(Booking);
+Booking.belongsTo(User);
 
-    Show.hasMany(Booking, {foreignKey: 'showId'});
-    Booking.belongsTo(Show, {foreignKey: 'showId'});
+Show.hasMany(Booking);
+Booking.belongsTo(Show);
 
-    Booking.hasOne(Seat, {foreignKey: 'seatId'});
-    Seat.belongsTo(Booking, {foreignKey: 'seatId'});
-}
+Seat.hasMany(Booking);
+Booking.belongsTo(Seat);
