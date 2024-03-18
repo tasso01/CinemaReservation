@@ -10,6 +10,10 @@ const Show = sequelize.define('Show', {
     date: {
         type: DataTypes.DATE,
         allowNull: false
+    },
+    price: {
+        type: DataTypes.FLOAT,
+        allowNull: false
     }
 });
 
