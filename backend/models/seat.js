@@ -14,6 +14,15 @@ const Seat = sequelize.define('Seat', {
     status: {
         type: DataTypes.BOOLEAN,
         allowNull: false
+    },
+    hallId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+            references: {
+                model: 'Hall',
+                key: 'id',
+            },
+            onDelete: 'SET NULL',
     }
 });
 
