@@ -15,15 +15,6 @@ const Seat = sequelize.define('Seat', {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    hallId: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-            references: {
-                model: 'Hall',
-                key: 'id',
-            },
-            onDelete: 'SET NULL',
-    }
 });
 
 module.exports = Seat;
