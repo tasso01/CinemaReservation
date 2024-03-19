@@ -6,6 +6,6 @@ router.get('/halls/hallById/:id', hallController.getHallById);
 router.get('/halls/hallByNumber/:number', hallController.getHallByNumber);
 router.post('/halls/addHall', hallController.addHall);
 router.put('/halls/updateHall/:id', hallController.updateHall);
-router.delete('halls/deleteHall/:id', hallController.deleteHall);
+router.delete('halls/removeHall/:id', hallController.removeHall);
 
 module.exports = router;
