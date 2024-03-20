@@ -12,8 +12,6 @@ exports.getAllFilms = async (req, res) => {
 exports.getFilmById = async (req, res) => {
     try {
         const film = await Film.findByPk(req.params.id);
-        if (film == null)
-            return res.status(404).send({message: 'Film not found', status: 404});
         return res.status(200).json(film);
     } catch (error) {
         return res.status(500).send({error: 'Error retrieving film', status: 500});
@@ -22,23 +20,19 @@ exports.getFilmById = async (req, res) => {
 
 exports.getFilmByTitle = async (req, res) => {
     try {
-        const film = await Film.findOne({where: {title: req.params.title}});
-        if (film == null)
-            return res.status(404).send({message: 'Film not found', status: 404});
+        const film = await Film.findAll({where: {title: req.params.title}});
         return res.status(200).json(film);
     } catch (error) {
-        return res.status(500).send({error: 'Error retrieving film', status: 500});
+        return res.status(500).send({error: 'Error retrieving films', status: 500});
     }
 }
 
 exports.getFilmByDirector = async (req, res) => {
     try {
-        const film = await Film.findOne({where: {director: req.params.director}});
-        if (film == null)
-            return res.status(404).send({message: 'Film not found', status: 404});
+        const film = await Film.findAll({where: {director: req.params.director}});
         return res.status(200).json(film);
     } catch (error) {
-        return res.status(500).send({error: 'Error retrieving film', status: 500});
+        return res.status(500).send({error: 'Error retrieving films', status: 500});
     }
 }
 
@@ -57,8 +51,6 @@ exports.updateFilm = async (req, res) => {
     const {title, director, description, duration} = req.body;
     try {
         const film = await Film.findByPk(req.params.id);
-        if (film == null)
-            return res.status(404).send({message: 'Film not found', status: 404});
         film.title = title;
         film.director = director;
         film.description = description;
@@ -73,9 +65,8 @@ exports.updateFilm = async (req, res) => {
 exports.removeFilmById = async (req, res) => {
     try {
         const film = await Film.findByPk(req.params.id);
-        if (film == null)
-            return res.status(404).send({message: 'Film not found', status: 404});
         await film.destroy();
+        return res.status(200).send({message: 'Film deleted', status: 200});
     } catch (error) {
         return res.status(500).send({error: 'Error deleting film', status: 500});
     }
