@@ -9,7 +9,7 @@ const Film = sequelize.define('Film', {
     },
     title: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
     },
     director: {
         type: DataTypes.STRING,
