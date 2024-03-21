@@ -48,11 +48,9 @@ exports.addBooking = async (req, res) => {
 }
 
 exports.updateBooking = async (req, res) => {
-    const {userId, showId, seatId} = req.body;
+    const {seatId} = req.body;
     try {
         const booking = await Booking.findByPk(req.params.id);
-        booking.userId = userId;
-        booking.showId = showId;
         booking.seatId = seatId;
         await booking.save();
         return res.status(200).send({message: 'Booking updated', status: 200});

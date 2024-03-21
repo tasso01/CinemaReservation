@@ -8,6 +8,7 @@ const filmRoute = require('./routes/filmRoute');
 const hallRoute = require('./routes/hallRoute');
 const seatRoute = require('./routes/seatRoute');
 const showRoute = require('./routes/showRoute');
+const userRoute = require('./routes/userRoute');
 
 app.use(express.json());
 
@@ -16,6 +17,7 @@ app.use(filmRoute);
 app.use(hallRoute);
 app.use(seatRoute);
 app.use(showRoute);
+app.use(userRoute);
 
 sequelize.sync({ force: false })
     .then(() => {console.log("Connessione al Database effettuata")})
