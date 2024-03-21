@@ -1,6 +1,5 @@
 const Booking = require('../models/booking');
 
-//getAllBookings()
 exports.getAllBookings = async (req, res) => {
     try {
         const allBooking = await Booking.findAll();
@@ -10,47 +9,37 @@ exports.getAllBookings = async (req, res) => {
     }
 }
 
-//getBookingById()
 exports.getBookingById = async (req, res) => {
     try {
         const booking = await Booking.findByPk(req.params.id);
-        if (booking == null)
-            return res.status(404).send({message: 'Booking not found', status: 404});
         return res.status(200).json(booking);
     } catch (error) {
         return res.status(500).send({error: 'Error retrieving Booking', status: 500});
     }
 }
 
-//getBookingsByUser()
-exports.getBookingByUser = async (req, res) => {
+exports.getBookingsByUser = async (req, res) => {
     try {
-        const booking = await Booking.findOne(req.params.UserId);
-        if (booking == null)
-            return res.status(404).send({message: 'Booking not found', status: 404});
+        const booking = await Booking.findAll({where: {user: req.params.user}});
         return res.status(200).json(booking);
     } catch (error) {
         return res.status(500).send({error: 'Error retrieving Booking', status: 500});
     }
 }
 
-//getBookingsByShow()
-exports.getBookingByShow = async (req, res) => {
+exports.getBookingsByShow = async (req, res) => {
     try {
-        const booking = await Booking.findOne(req.params.ShowId);
-        if (booking == null)
-            return res.status(404).send({message: 'Booking not found', status: 404});
+        const booking = await Booking.findAll({where: {show: req.params.show}});
         return res.status(200).json(booking);
     } catch (error) {
         return res.status(500).send({error: 'Error retrieving Booking', status: 500});
     }
 }
 
-//addBooking()
 exports.addBooking = async (req, res) => {
-    const {UserId, ShowId, SeatId} = req.body;
+    const {userId, showId, seatId} = req.body;
     try {
-        const booking = await Booking.create({UserId, ShowId, SeatId});
+        const booking = await Booking.create({userId, showId, seatId});
         await booking.save();
         return res.status(200).send({message: 'Booking created', status: 200});
     } catch (error) {
@@ -58,16 +47,13 @@ exports.addBooking = async (req, res) => {
     }
 }
 
-//updateBooking()
 exports.updateBooking = async (req, res) => {
-    const {UserId, ShowId, SeatId} = req.body;
+    const {userId, showId, seatId} = req.body;
     try {
         const booking = await Booking.findByPk(req.params.id);
-        if (booking == null)
-            return res.status(404).send({message: 'Booking not found', status: 404});
-        booking.UserId = UserId;
-        booking.ShowId = ShowId;
-        booking.SeatId = SeatId;
+        booking.userId = userId;
+        booking.showId = showId;
+        booking.seatId = seatId;
         await booking.save();
         return res.status(200).send({message: 'Booking updated', status: 200});
     } catch (error) {
@@ -75,13 +61,11 @@ exports.updateBooking = async (req, res) => {
     }
 }
 
-//deleteBooking()
-exports.removeBookingById = async (req, res) => {
+exports.removeBooking = async (req, res) => {
     try {
         const booking = await Booking.findByPk(req.params.id);
-        if (booking == null)
-            return res.status(404).send({message: 'Booking not found', status: 404});
         await booking.destroy();
+        return res.status(200).send({message: 'Booking deleted', status: 200});
     } catch (error) {
         return res.status(500).send({error: 'Error deleting booking', status: 500});
     }
