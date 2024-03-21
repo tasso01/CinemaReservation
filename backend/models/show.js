@@ -1,5 +1,7 @@
 const { Sequelize, DataTypes } =  require('sequelize');
 const sequelize = require('../database/connection');
+const Hall = require('./hall');
+const Film = require('./film');
 
 const Show = sequelize.define('Show', {
     id: {
@@ -14,6 +16,22 @@ const Show = sequelize.define('Show', {
     price: {
         type: DataTypes.FLOAT,
         allowNull: false
+    },
+    hallId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: Hall,
+            key: 'id'
+        }
+    },
+    filmId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: Film,
+            key: 'id'
+        }
     }
 });
 

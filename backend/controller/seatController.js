@@ -20,7 +20,7 @@ exports.getSeatById = async (req, res) => {
 
 exports.getSeatByHall = async (req, res) => {
     try {
-        const seat = await Seat.findOne({where: {hall: req.params.hall}});
+        const seat = await Seat.findAll({where: {hallId: req.params.hall}});
         return res.status(200).json(seat);
     } catch (error) {
         return res.status(500).send({error: 'Error retrieving seat', status: 500});

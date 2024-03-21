@@ -29,7 +29,7 @@ exports.getShowsByDate = async (req, res) => {
 
 exports.getShowsByHall = async (req, res) => {
     try {
-        const show = await Show.findAll({where: {hall: req.params.hall}});
+        const show = await Show.findAll({where: {hallId: req.params.hall}});
         return res.status(200).json(show);
     } catch (error) {
         return res.status(500).send({error: 'Error retrieving shows', status: 500});
@@ -39,7 +39,7 @@ exports.getShowsByHall = async (req, res) => {
 
 exports.getShowsByFilm = async (req, res) => {
     try {
-        const show = await Show.findAll({where: {film: req.params.film}});
+        const show = await Show.findAll({where: {filmId: req.params.film}});
         return res.status(200).json(show);
     } catch (error) {
         return res.status(500).send({error: 'Error retrieving shows', status: 500});
