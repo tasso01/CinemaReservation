@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 
-const associations = require('./models/associations');
 const sequelize = require('./database/connection');
 
 const bookingRoute = require('./routes/bookingRoute');
@@ -10,7 +9,6 @@ const hallRoute = require('./routes/hallRoute');
 const seatRoute = require('./routes/seatRoute');
 const showRoute = require('./routes/showRoute');
 
-
 app.use(express.json());
 
 app.use(bookingRoute);
@@ -18,7 +16,6 @@ app.use(filmRoute);
 app.use(hallRoute);
 app.use(seatRoute);
 app.use(showRoute);
-
 
 sequelize.sync({ force: false })
     .then(() => {console.log("Connessione al Database effettuata")})

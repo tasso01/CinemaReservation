@@ -20,7 +20,7 @@ exports.getBookingById = async (req, res) => {
 
 exports.getBookingsByUser = async (req, res) => {
     try {
-        const booking = await Booking.findAll({where: {user: req.params.user}});
+        const booking = await Booking.findAll({where: {userId: req.params.user}});
         return res.status(200).json(booking);
     } catch (error) {
         return res.status(500).send({error: 'Error retrieving Booking', status: 500});
@@ -29,7 +29,7 @@ exports.getBookingsByUser = async (req, res) => {
 
 exports.getBookingsByShow = async (req, res) => {
     try {
-        const booking = await Booking.findAll({where: {show: req.params.show}});
+        const booking = await Booking.findAll({where: {showId: req.params.show}});
         return res.status(200).json(booking);
     } catch (error) {
         return res.status(500).send({error: 'Error retrieving Booking', status: 500});
@@ -39,7 +39,7 @@ exports.getBookingsByShow = async (req, res) => {
 exports.addBooking = async (req, res) => {
     const {userId, showId, seatId} = req.body;
     try {
-        const booking = await Booking.create({userId, showId, seatId});
+        const booking = await Booking.create();
         await booking.save();
         return res.status(200).send({message: 'Booking created', status: 200});
     } catch (error) {
