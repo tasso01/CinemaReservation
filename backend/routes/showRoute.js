@@ -8,6 +8,6 @@ router.get('/shows/showsByHall/:hall', showController.getShowsByHall);
 router.get('/shows/showsByFilm/:film', showController.getShowsByFilm);
 router.post('/shows/addShow', showController.addShow);
 router.put('/shows/updateShow/:id', showController.updateShow);
-router.delete('shows/removeShow/:id', showController.removeShow);
+router.delete('/shows/removeShow/:id', showController.removeShow);
 
 module.exports = router;

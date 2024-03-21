@@ -1,7 +1,6 @@
 const Show = require('../models/show')
 
-//getAllShows()
-exports.getAllShow = async (req, res) => {
+exports.getAllShows = async (req, res) => {
     try {
         const allShow = await Show.findAll();
         return res.status(200).json(allShow);
@@ -10,61 +9,48 @@ exports.getAllShow = async (req, res) => {
     }
 }
 
-//getShowById()
 exports.getShowById = async (req, res) => {
     try {
         const show = await Show.findByPk(req.params.id);
-        if (show == null)
-            return res.status(404).send({message: 'Show not found', status: 404});
         return res.status(200).json(show);
     } catch (error) {
         return res.status(500).send({error: 'Error retrieving show', status: 500});
     }
 }
 
-//getShowsByDate()
-exports.getShowByDate = async (req, res) => {
+exports.getShowsByDate = async (req, res) => {
     try {
-        const show = await Show.findOne(req.params.date);
-        if (show == null)
-            return res.status(404).send({message: 'Show not found', status: 404});
+        const show = await Show.findAll({where: {date: req.params.date}});
         return res.status(200).json(show);
     } catch (error) {
-        return res.status(500).send({error: 'Error retrieving show', status: 500});
+        return res.status(500).send({error: 'Error retrieving shows', status: 500});
     }
 }
 
-//getShowsByHall()
-exports.getShowByHall = async (req, res) => {
+exports.getShowsByHall = async (req, res) => {
     try {
-        const show = await Show.findOne(req.params.HallId);
-        if (show == null)
-            return res.status(404).send({message: 'Show not found', status: 404});
+        const show = await Show.findAll({where: {hall: req.params.hall}});
         return res.status(200).json(show);
     } catch (error) {
-        return res.status(500).send({error: 'Error retrieving show', status: 500});
+        return res.status(500).send({error: 'Error retrieving shows', status: 500});
     }
 }
 
 
-//getShowsByFilm()
-exports.getShowByFilm = async (req, res) => {
+exports.getShowsByFilm = async (req, res) => {
     try {
-        const show = await Show.findOne(req.params.FilmId);
-        if (show == null)
-            return res.status(404).send({message: 'Show not found', status: 404});
+        const show = await Show.findAll({where: {film: req.params.film}});
         return res.status(200).json(show);
     } catch (error) {
-        return res.status(500).send({error: 'Error retrieving show', status: 500});
+        return res.status(500).send({error: 'Error retrieving shows', status: 500});
     }
 }
 
 
-//addShow()
 exports.addShow = async (req, res) => {
-    const {date, price, HallId, FilmId} = req.body;
+    const {date, price, hallId, filmId} = req.body;
     try {
-        const show = await Show.create({date, price, HallId, FilmId});
+        const show = await Show.create({date, price, hallId, filmId});
         await show.save();
         return res.status(200).send({message: 'Show created', status: 200});
     } catch (error) {
@@ -72,17 +58,14 @@ exports.addShow = async (req, res) => {
     }
 }
 
-//updateShow()
 exports.updateShow = async (req, res) => {
-    const {date, price, HallId, FilmId} = req.body;
+    const {date, price, hallId, filmId} = req.body;
     try {
         const show = await Show.findByPk(req.params.id);
-        if (show == null)
-            return res.status(404).send({message: 'Show not found', status: 404});
         show.date = date;
         show.price = price;
-        show.HallId = HallId;
-        show.FilmId = FilmId;
+        show.hallId = hallId;
+        show.filmId = filmId;
         await show.save();
         return res.status(200).send({message: 'Show updated', status: 200});
     } catch (error) {
@@ -90,13 +73,11 @@ exports.updateShow = async (req, res) => {
     }
 }
 
-//deleteShow()
-exports.removeShowById = async (req, res) => {
+exports.removeShow = async (req, res) => {
     try {
-        const show = await Show.findByPk(req.params.id);
-        if (show == null)
-            return res.status(404).send({message: 'Show not found', status: 404});
-        await show.destroy();
+        const film = await Show.findByPk(req.params.id);
+        await film.destroy();
+        return res.status(200).send({message: 'Show deleted', status: 200});
     } catch (error) {
         return res.status(500).send({error: 'Error deleting show', status: 500});
     }
