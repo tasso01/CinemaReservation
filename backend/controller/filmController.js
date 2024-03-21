@@ -62,7 +62,7 @@ exports.updateFilm = async (req, res) => {
     }
 }
 
-exports.removeFilmById = async (req, res) => {
+exports.removeFilm = async (req, res) => {
     try {
         const film = await Film.findByPk(req.params.id);
         await film.destroy();

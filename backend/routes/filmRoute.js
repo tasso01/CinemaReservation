@@ -7,6 +7,6 @@ router.get('/films/filmByTitle/:title', filmController.getFilmByTitle);
 router.get('/films/filmByDirector/:director', filmController.getFilmByDirector);
 router.post('/films/addFilm', filmController.addFilm);
 router.put('/films/updateFilm/:id', filmController.updateFilm);
-router.delete('/films/removeFilmById/:id', filmController.removeFilmById);
+router.delete('/films/removeFilm/:id', filmController.removeFilm);
 
 module.exports = router;
