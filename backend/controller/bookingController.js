@@ -39,7 +39,7 @@ exports.getBookingsByShow = async (req, res) => {
 exports.addBooking = async (req, res) => {
     const {userId, showId, seatId} = req.body;
     try {
-        const booking = await Booking.create();
+        const booking = await Booking.create({userId, showId, seatId});
         await booking.save();
         return res.status(200).send({message: 'Booking created', status: 200});
     } catch (error) {
