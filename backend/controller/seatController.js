@@ -1,7 +1,6 @@
 const Seat = require('../models/seat')
 
-//getAllSeats()
-exports.getAllSeat = async (req, res) => {
+exports.getAllSeats = async (req, res) => {
     try {
         const allSeat = await Seat.findAll();
         return res.status(200).json(allSeat);
@@ -10,36 +9,28 @@ exports.getAllSeat = async (req, res) => {
     }
 }
 
-
-//getSeatById()
 exports.getSeatById = async (req, res) => {
     try {
         const seat = await Seat.findByPk(req.params.id);
-        if (seat == null)
-            return res.status(404).send({message: 'Seat not found', status: 404});
         return res.status(200).json(seat);
     } catch (error) {
         return res.status(500).send({error: 'Error retrieving seat', status: 500});
     }
 }
 
-//getSeatByHall()
 exports.getSeatByHall = async (req, res) => {
     try {
-        const seat = await Seat.findOne({where: {HallId: req.params.HallId}});
-        if (seat == null)
-            return res.status(404).send({message: 'Seat not found', status: 404});
+        const seat = await Seat.findOne({where: {hall: req.params.hall}});
         return res.status(200).json(seat);
     } catch (error) {
         return res.status(500).send({error: 'Error retrieving seat', status: 500});
     }
 }
 
-//addSeat()
 exports.addSeat = async (req, res) => {
-    const {number, status, HallId} = req.body;
+    const {number, status, hallId} = req.body;
     try {
-        const seat = await Seat.create({number, status, HallId});
+        const seat = await Seat.create({number, status, hallId});
         await seat.save();
         return res.status(200).send({message: 'Seat created', status: 200});
     } catch (error) {
@@ -47,13 +38,10 @@ exports.addSeat = async (req, res) => {
     }
 }
 
-//updateSeat()
 exports.updateSeat = async (req, res) => {
     const {number, status, HallId} = req.body;
     try {
         const seat = await Seat.findByPk(req.params.id);
-        if (seat == null)
-            return res.status(404).send({message: 'Seat not found', status: 404});
         seat.number = number;
         seat.status = status;
         seat.HallId = HallId;
@@ -64,13 +52,11 @@ exports.updateSeat = async (req, res) => {
     }
 }
 
-//deleteSeat()
-exports.removeSeatById = async (req, res) => {
+exports.removeSeat = async (req, res) => {
     try {
         const seat = await Seat.findByPk(req.params.id);
-        if (seat == null)
-            return res.status(404).send({message: 'Seat not found', status: 404});
         await seat.destroy();
+        return res.status(200).send({message: 'Seat deleted', status: 200});
     } catch (error) {
         return res.status(500).send({error: 'Error deleting seat', status: 500});
     }
