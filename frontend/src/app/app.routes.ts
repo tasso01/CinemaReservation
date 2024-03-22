@@ -8,17 +8,21 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { HomeComponent } from './components/home/home.component';
+import { BookingComponent } from './components/booking/booking.component';
+import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
     {path: '', component: DashboardComponent, children: [
         {path: '', redirectTo: 'HOME', pathMatch: 'full'},
         {path: 'HOME', component: HomeComponent},
         {path: 'SPETTACOLI', component: ShowsComponent},
+        {path: 'PRENOTAZIONE', component: BookingComponent, canActivate: [AuthGuard]},
         {path: 'CHI SIAMO', component: AboutComponent},
         {path: 'CONTATTACI', component: ContactsComponent},
         {path: 'PROFILO', component: ProfileComponent},
     ]},
     {path: 'home', component: HomeComponent},
+    {path: 'booking', component: BookingComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'about', component: AboutComponent},

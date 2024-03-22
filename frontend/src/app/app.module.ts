@@ -10,8 +10,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
-
-
+import {MatCardModule} from '@angular/material/card';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -23,7 +22,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
-
+import { BookingComponent } from './components/booking/booking.component';
 
 
 @NgModule({
@@ -36,6 +35,7 @@ import { HomeComponent } from './components/home/home.component';
     AboutComponent,
     ProfileComponent,
     ContactsComponent,
+    BookingComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +50,7 @@ import { HomeComponent } from './components/home/home.component';
     MatListModule,
     MatToolbarModule,
     MatIconModule,
+    MatCardModule,
   ],
   providers: [],
 })
