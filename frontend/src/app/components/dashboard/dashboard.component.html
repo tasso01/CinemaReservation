@@ -1,1 +1,27 @@
-<p>dashboard works!</p>
+<mat-toolbar>
+    <span>Cinema</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>login</mat-icon>
+      </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+<mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+        <mat-list role="list">
+            <mat-list-item role="listitem" routerLink="HOME">HOME</mat-list-item>
+            <mat-list-item role="listitem" routerLink="SPETTACOLI">SPETTACOLI</mat-list-item>
+            <mat-list-item role="listitem" routerLink="CHI SIAMO">CHI SIAMO</mat-list-item>
+            <mat-list-item role="listitem" routerLink="CONTATTACI">CONTATTACI</mat-list-item>
+            <mat-list-item role="listitem" routerLink="PROFILO">PROFILO</mat-list-item>
+          </mat-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
