@@ -22,6 +22,7 @@
   "homepage": "https://github.com/tasso01/CinemaReservation#readme",
   "dependencies": {
     "express": "^4.18.3",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.2",
     "sequelize": "^6.37.1"
   }
