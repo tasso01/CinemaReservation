@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
-
 const sequelize = require('./database/connection');
 
+const administratorRoute = require('./routes/administratorRoute');
 const bookingRoute = require('./routes/bookingRoute');
 const filmRoute = require('./routes/filmRoute');
 const hallRoute = require('./routes/hallRoute');
@@ -12,6 +12,7 @@ const userRoute = require('./routes/userRoute');
 
 app.use(express.json());
 
+app.use(administratorRoute);
 app.use(bookingRoute);
 app.use(filmRoute);
 app.use(hallRoute);
