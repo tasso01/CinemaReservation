@@ -1,13 +1,13 @@
 <h1>Effettua il login!!!</h1>
 
-<form #loginForm = 'ngForm' (ngSubmit)="onSubmit(loginForm)">
-<mat-form-field>
-    <mat-label>Input</mat-label>
-    <input matInput type="email"  name=" email" required ngModel>
-  </mat-form-field>
+<form [formGroup] = 'loginForm' (ngSubmit)="onSubmit()">
   <mat-form-field>
-    <mat-label>Input</mat-label>
-    <input matInput type ="password" name="password" required ngModel>
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.valid">Invia</button>
-</form>
+      <mat-label>Input</mat-label>
+      <input matInput type="email"  name=" email" formControlName = "email">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Input</mat-label>
+      <input matInput type ="password" name="password" formControlName = "password">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.valid">Registrati</button>
+  </form>

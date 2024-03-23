@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +8,20 @@ import { NgForm } from '@angular/forms';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  loginForm: FormGroup;
 
-  constructor(){}
-
-  onSubmit(form: NgForm){
-    const email = form.value.email;
-    const password = form.value.password;
+  constructor(private formBuilder: FormBuilder, private users: UsersService) {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
+  }
+  onSubmit(){
+    if (this.loginForm.invalid) {
+      return;
+    }
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
     //TODO CHIAMA AUTHSERVICE
   }
 }
