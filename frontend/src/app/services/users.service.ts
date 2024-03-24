@@ -9,6 +9,6 @@ export class UsersService {
   constructor(private http: HttpClient) {   }
   
   addUsers(url: string, body: {}){
-    this.http.post(url, body) 
+    return this.http.post(url, body) 
   }
 }

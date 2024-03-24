@@ -1,13 +1,20 @@
 <h1>Effettua il login!!!</h1>
 
-<form [formGroup] = 'loginForm' (ngSubmit)="onSubmit()">
+<form [formGroup] = "loginForm" (ngSubmit)="onSubmit()">
   <mat-form-field>
-      <mat-label>Input</mat-label>
-      <input matInput type="email"  name=" email" formControlName = "email">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Input</mat-label>
-      <input matInput type ="password" name="password" formControlName = "password">
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.valid">Registrati</button>
-  </form>
+    <p>Username</p>
+    <mat-label>Username</mat-label>
+    <input matInput type="username"  name=" username" formControlName = "username">
+  </mat-form-field>
+  <mat-form-field>
+    <p>Email</p>
+    <mat-label>Email</mat-label>
+    <input matInput type="email"  name=" email" formControlName = "email">
+  </mat-form-field>
+  <mat-form-field>
+    <p>Password</p>
+    <mat-label>Password</mat-label>
+    <input matInput type ="password" name="password" formControlName = "password">
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Loggati</button>
+</form>

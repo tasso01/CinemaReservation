@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { EmailValidator, FormBuilder, FormControl, FormGroup, NgForm, RequiredValidator, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../../services/users.service';
+import { environment } from '../../../environments/environment.development';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -8,27 +10,32 @@ import { UsersService } from '../../services/users.service';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent implements OnInit {
-  private url = 'http://localhost:3306/cinema/users';
+  private url = environment.apiUrl + '/users';
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private users: UsersService) {
-   this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+
+  constructor(private authService: AuthService) {
+   this.registerForm = new FormGroup({
+    username: new FormControl(['', [Validators.required]]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
 
     
   }
   ngOnInit(): void {
-    this.users.addUsers(this.url, {
-      email: this.registerForm.value.email, password: this.registerForm.value.password
-    })
   }
 
   onSubmit(){
-    const email = this.registerForm.value.email;
-    const password = this.registerForm.value.password;
-    //TODO CHIAMA AUTHSERVICE
+    this.authService.signUp({
+      username: this.registerForm.value.username,
+      email: this.registerForm.value.email, 
+      password: this.registerForm.value.password
+    }
+      )
+    .subscribe((data) => {
+      console.log(data);
+    })
   }
 }
 
