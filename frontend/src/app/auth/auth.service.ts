@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root'
 })
 export class AuthService {
-url = environment.apiUrl + '/users';
+url = environment.apiUrl + 'authentication';
 isLoggedIn = false;
 
   constructor(private http: HttpClient) { }
@@ -21,7 +21,14 @@ isRoleAdmin(){
 }
 
 signUp(body: {}){
- return this.http.post(this.url, body)
+ return this.http.post(this.url + '/register', body)
 }
 
+logIn(body: {}){
+  return this.http.post(this.url + '/login', body)
+}
+
+logOut(body: {}){
+  return this.http.post(this.url + '/logout', body)
+}
 }

@@ -10,7 +10,6 @@ import { AuthService } from '../../auth/auth.service';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent implements OnInit {
-  private url = environment.apiUrl + '/users';
   registerForm: FormGroup;
 
 
@@ -29,7 +28,7 @@ export class RegisterComponent implements OnInit {
   onSubmit(){
     this.authService.signUp({
       username: this.registerForm.value.username,
-      email: this.registerForm.value.email, 
+      //email: this.registerForm.value.email, 
       password: this.registerForm.value.password
     }
       )
