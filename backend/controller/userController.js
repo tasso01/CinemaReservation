@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const jwt = require('../middleware/jwt');
 
 exports.getAllUsers = async (req, res) => {
     try {
@@ -30,7 +31,14 @@ exports.register =  async (req, res) => {
 }
 
 exports.login = async (req, res) => {
-
+    console.log(req.body.username, req.body.password);
+    if (req.body.username == "tasso") {
+        let token = jwt.setToken(2, req.body.username);
+        let payload = jwt.getPayload(token);
+        res.json({token: token, payload: payload});
+    } else {
+        res.sendStatus(401);
+    }
 }
 
 exports.logout = async (req, res) => {

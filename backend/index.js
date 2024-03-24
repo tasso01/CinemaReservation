@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const sequelize = require('./database/connection');
 
+const mid = require('./middleware/mid');
+
 const administratorRoute = require('./routes/administratorRoute');
 const bookingRoute = require('./routes/bookingRoute');
 const filmRoute = require('./routes/filmRoute');
@@ -25,8 +27,8 @@ sequelize.sync({ force: false })
     .catch((error) => {console.log("Connessione al Database fallita"+error.message)
 });
 
-app.get('/', (req, res) => {
-    res.send('Home page')
+app.get('/', [mid.checkAuth], (req, res) => {
+    res.end('Home Page');
 });
 
 app.listen(3000, () => {
