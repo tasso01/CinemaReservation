@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const jwt = require('../middleware/jwt');
 
 exports.getAllUsers = async (req, res) => {
     try {
@@ -25,14 +26,25 @@ exports.register =  async (req, res) => {
         await user.save();
         return res.status(201).send({message: 'User created', status: 201});
     } catch (error) {
+        console.log(error)
         return res.status(500).send({error: 'Error creating user', status: 500});
     }
 }
 
 exports.login = async (req, res) => {
-
+    const {username, password} = req.body;
+    const user = await User.findOne({where: {username: username}});
+    if (user === null)
+        return res.status(500).send({message: 'Invalid username', status: 500});
+    const pass = await password === user.password;
+    if(!pass)
+        return res.status(500).send({message: 'Invalid password', status: 500});
+    let token = jwt.setToken(1, username);
+    let payload = jwt.getPayload(token);
+    res.json({token: token, payload: payload});
 }
 
 exports.logout = async (req, res) => {
     
 }
+
