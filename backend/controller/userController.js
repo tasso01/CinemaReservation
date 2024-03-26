@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const {generateAccessToken} = require('../authentication/jwt');
-const { username } = require("../database/config");
+const {hashPassword, comparePasswords} = require('../authentication/hash');
 
 exports.getAllUsers = async (req, res) => {
     try {
@@ -22,24 +22,31 @@ exports.getUserById = async (req, res) => {
 
 exports.register =  async (req, res) => {
     const {username, password} = req.body;
+    const hashedPassword = await hashPassword(password);
     try {
-        const existingUser = User.findOne({where: {username: username}})
-        if (existingUser !== null) {
+        const existingUser = await User.findOne({where: {username: username}})
+        if (existingUser)
             return res.status(400).json({message: "Username already used"})
-        }
-        const newUser = await User.create({username, password});
+        const newUser = await User.create({username, hashedPassword});
         await newUser.save();
-        const token = generateAccessToken({username: req.body.username});
+        const token = generateAccessToken({username: username});
         res.status(201).json(token);
     } catch (error) {
         console.log(error);
         res.status(500);
     }
-    
 }
 
 exports.login = async (req, res) => {
-
+    const {username, password} = req.body;
+    try {
+        const existingUser = await User.findOne({where: {username: username}})
+        if (!existingUser)
+            return res.status(401).json({message: "Invalid username or password"})
+    } catch (error) {
+        console.log(error);
+        res.status(500);
+    }
 }
 
 exports.logout = async (req, res) => {
