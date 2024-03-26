@@ -19,7 +19,7 @@ app.use(seatRoute);
 app.use(showRoute);
 app.use(userRoute);
 
-sequelize.sync({ force: false })
+sequelize.sync({ force: true })
     .then(() => {console.log("Connessione al Database effettuata")})
     .catch((error) => {console.log("Connessione al Database fallita"+error.message)
 });
