@@ -1,4 +1,6 @@
 const User = require("../models/user");
+const {generateAccessToken} = require('../authentication/jwt');
+const { username } = require("../database/config");
 
 exports.getAllUsers = async (req, res) => {
     try {
@@ -19,14 +21,10 @@ exports.getUserById = async (req, res) => {
 }
 
 exports.register =  async (req, res) => {
-    const {username, password} = req.body;
-    try {
-        const user = await User.create({username, password});
-        await user.save();
-        return res.status(201).send({message: 'User created', status: 201});
-    } catch (error) {
-        return res.status(500).send({error: 'Error creating user', status: 500});
-    }
+    //
+    const token = generateAccessToken({username: req.body.username});
+    res.json(token);
+    //
 }
 
 exports.login = async (req, res) => {
