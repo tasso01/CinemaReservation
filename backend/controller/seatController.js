@@ -1,4 +1,5 @@
 const Seat = require('../models/seat')
+const User = require('../models/user');
 
 exports.getAllSeats = async (req, res) => {
     try {
@@ -30,6 +31,9 @@ exports.getSeatByHall = async (req, res) => {
 exports.addSeat = async (req, res) => {
     const {number, status, hallId} = req.body;
     try {
+        const user = await User.findOne({where: {username: req.body.username}});
+        if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})
         const seat = await Seat.create({number, status, hallId});
         await seat.save();
         return res.status(200).send({message: 'Seat created', status: 200});
@@ -41,6 +45,9 @@ exports.addSeat = async (req, res) => {
 exports.updateSeat = async (req, res) => {
     const {number, status, HallId} = req.body;
     try {
+        const user = await User.findOne({where: {username: req.body.username}});
+        if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})
         const seat = await Seat.findByPk(req.params.id);
         seat.number = number;
         seat.status = status;
@@ -54,6 +61,9 @@ exports.updateSeat = async (req, res) => {
 
 exports.removeSeat = async (req, res) => {
     try {
+        const user = await User.findOne({where: {username: req.body.username}});
+        if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})
         const seat = await Seat.findByPk(req.params.id);
         await seat.destroy();
         return res.status(200).send({message: 'Seat deleted', status: 200});

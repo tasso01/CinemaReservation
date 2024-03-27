@@ -1,4 +1,5 @@
 const Hall = require('../models/hall');
+const User = require('../models/user');
 
 exports.getAllHall = async (req, res) => {
     try {
@@ -30,6 +31,9 @@ exports.getHallByNumber = async (req, res) => {
 exports.addHall = async (req, res) => {
     const {number, capacity} = req.body;
     try {
+        const user = await User.findOne({where: {username: req.body.username}});
+        if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})
         const hall = await Hall.create({number, capacity});
         await hall.save();
         return res.status(200).send({message: 'Hall created', status: 200});
@@ -41,6 +45,9 @@ exports.addHall = async (req, res) => {
 exports.updateHall = async (req, res) => {
     const {number, capacity} = req.body;
     try {
+        const user = await User.findOne({where: {username: req.body.username}});
+        if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})
         const hall = await Hall.findByPk(req.params.id);
         hall.number = number;
         hall.capacity = capacity;
@@ -53,6 +60,9 @@ exports.updateHall = async (req, res) => {
 
 exports.removeHall = async (req, res) => {
     try {
+        const user = await User.findOne({where: {username: req.body.username}});
+        if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})
         const hall = await Hall.findByPk(req.params.id);
         await hall.destroy();
         return res.status(200).send({message: 'Hall deleted', status: 200});

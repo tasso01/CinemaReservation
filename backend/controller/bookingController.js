@@ -1,4 +1,5 @@
 const Booking = require('../models/booking');
+const User = require('../models/user');
 
 exports.getAllBookings = async (req, res) => {
     try {
@@ -39,6 +40,9 @@ exports.getBookingsByShow = async (req, res) => {
 exports.addBooking = async (req, res) => {
     const {userId, showId, seatId} = req.body;
     try {
+        const user = await User.findOne({where: {username: req.body.username}});
+        if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})
         const booking = await Booking.create({userId, showId, seatId});
         await booking.save();
         return res.status(200).send({message: 'Booking created', status: 200});
@@ -50,6 +54,9 @@ exports.addBooking = async (req, res) => {
 exports.updateBooking = async (req, res) => {
     const {seatId} = req.body;
     try {
+        const user = await User.findOne({where: {username: req.body.username}});
+        if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})
         const booking = await Booking.findByPk(req.params.id);
         booking.seatId = seatId;
         await booking.save();
@@ -61,6 +68,9 @@ exports.updateBooking = async (req, res) => {
 
 exports.removeBooking = async (req, res) => {
     try {
+        const user = await User.findOne({where: {username: req.body.username}});
+        if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})
         const booking = await Booking.findByPk(req.params.id);
         await booking.destroy();
         return res.status(200).send({message: 'Booking deleted', status: 200});

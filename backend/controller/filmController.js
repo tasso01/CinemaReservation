@@ -1,4 +1,5 @@
 const Film = require('../models/film');
+const User = require('../models/user');
 
 exports.getAllFilms = async (req, res) => {
     try {
@@ -39,6 +40,9 @@ exports.getFilmByDirector = async (req, res) => {
 exports.addFilm = async (req, res) => {
     const {title, director, description, duration} = req.body;
     try {
+        const user = await User.findOne({where: {username: req.body.username}});
+        if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})
         const film = await Film.create({title, director, description, duration});
         await film.save();
         return res.status(200).send({message: 'Film created', status: 200});
@@ -50,6 +54,9 @@ exports.addFilm = async (req, res) => {
 exports.updateFilm = async (req, res) => {
     const {title, director, description, duration} = req.body;
     try {
+        const user = await User.findOne({where: {username: req.body.username}});
+        if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})
         const film = await Film.findByPk(req.params.id);
         film.title = title;
         film.director = director;
@@ -64,6 +71,9 @@ exports.updateFilm = async (req, res) => {
 
 exports.removeFilm = async (req, res) => {
     try {
+        const user = await User.findOne({where: {username: req.body.username}});
+        if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})
         const film = await Film.findByPk(req.params.id);
         await film.destroy();
         return res.status(200).send({message: 'Film deleted', status: 200});
