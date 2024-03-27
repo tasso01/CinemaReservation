@@ -40,7 +40,7 @@ exports.getFilmByDirector = async (req, res) => {
 exports.addFilm = async (req, res) => {
     const {title, director, description, duration} = req.body;
     try {
-        const user = await User.findOne({where: {username: req.body.username}});
+        const user = await User.findOne({where: {username: req.user.username}});
         if (!user.isAdmin)
             return res.status(401).send({message: 'User not authorized'})
         const film = await Film.create({title, director, description, duration});
@@ -54,8 +54,10 @@ exports.addFilm = async (req, res) => {
 exports.updateFilm = async (req, res) => {
     const {title, director, description, duration} = req.body;
     try {
-        const user = await User.findOne({where: {username: req.body.username}});
+        /*const user = await User.findOne({where: {username: req.body.username}});
         if (!user.isAdmin)
+            return res.status(401).send({message: 'User not authorized'})*/
+        if (!req.isAdmin)
             return res.status(401).send({message: 'User not authorized'})
         const film = await Film.findByPk(req.params.id);
         film.title = title;
