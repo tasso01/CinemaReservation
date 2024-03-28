@@ -31,3 +31,5 @@ app.get('/', (req, res) => {
 app.listen(3000, () => {
     console.log('Server in ascolto nella porta 3000')
 });
+
+const {generateHex} = require('./authentication/crypto');
