@@ -31,7 +31,7 @@ exports.getHallByNumber = async (req, res) => {
 exports.addHall = async (req, res) => {
     const {number, capacity} = req.body;
     try {
-        const user = await User.findOne({where: {username: req.body.username}});
+        const user = await User.findOne({where: {username: req.user.username}});
         if (!user.isAdmin)
             return res.status(401).send({message: 'User not authorized'})
         const hall = await Hall.create({number, capacity});
@@ -45,7 +45,7 @@ exports.addHall = async (req, res) => {
 exports.updateHall = async (req, res) => {
     const {number, capacity} = req.body;
     try {
-        const user = await User.findOne({where: {username: req.body.username}});
+        const user = await User.findOne({where: {username: req.user.username}});
         if (!user.isAdmin)
             return res.status(401).send({message: 'User not authorized'})
         const hall = await Hall.findByPk(req.params.id);
@@ -60,7 +60,7 @@ exports.updateHall = async (req, res) => {
 
 exports.removeHall = async (req, res) => {
     try {
-        const user = await User.findOne({where: {username: req.body.username}});
+        const user = await User.findOne({where: {username: req.user.username}});
         if (!user.isAdmin)
             return res.status(401).send({message: 'User not authorized'})
         const hall = await Hall.findByPk(req.params.id);

@@ -31,7 +31,7 @@ exports.getSeatByHall = async (req, res) => {
 exports.addSeat = async (req, res) => {
     const {number, status, hallId} = req.body;
     try {
-        const user = await User.findOne({where: {username: req.body.username}});
+        const user = await User.findOne({where: {username: req.user.username}});
         if (!user.isAdmin)
             return res.status(401).send({message: 'User not authorized'})
         const seat = await Seat.create({number, status, hallId});
@@ -45,7 +45,7 @@ exports.addSeat = async (req, res) => {
 exports.updateSeat = async (req, res) => {
     const {number, status, HallId} = req.body;
     try {
-        const user = await User.findOne({where: {username: req.body.username}});
+        const user = await User.findOne({where: {username: req.user.username}});
         if (!user.isAdmin)
             return res.status(401).send({message: 'User not authorized'})
         const seat = await Seat.findByPk(req.params.id);
@@ -61,7 +61,7 @@ exports.updateSeat = async (req, res) => {
 
 exports.removeSeat = async (req, res) => {
     try {
-        const user = await User.findOne({where: {username: req.body.username}});
+        const user = await User.findOne({where: {username: req.user.username}});
         if (!user.isAdmin)
             return res.status(401).send({message: 'User not authorized'})
         const seat = await Seat.findByPk(req.params.id);

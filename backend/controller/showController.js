@@ -51,7 +51,7 @@ exports.getShowsByFilm = async (req, res) => {
 exports.addShow = async (req, res) => {
     const {date, price, hallId, filmId} = req.body;
     try {
-        const user = await User.findOne({where: {username: req.body.username}});
+        const user = await User.findOne({where: {username: req.user.username}});
         if (!user.isAdmin)
             return res.status(401).send({message: 'User not authorized'})
         const show = await Show.create({date, price, hallId, filmId});
@@ -65,7 +65,7 @@ exports.addShow = async (req, res) => {
 exports.updateShow = async (req, res) => {
     const {date, price, hallId, filmId} = req.body;
     try {
-        const user = await User.findOne({where: {username: req.body.username}});
+        const user = await User.findOne({where: {username: req.user.username}});
         if (!user.isAdmin)
             return res.status(401).send({message: 'User not authorized'})
         const show = await Show.findByPk(req.params.id);
@@ -82,7 +82,7 @@ exports.updateShow = async (req, res) => {
 
 exports.removeShow = async (req, res) => {
     try {
-        const user = await User.findOne({where: {username: req.body.username}});
+        const user = await User.findOne({where: {username: req.user.username}});
         if (!user.isAdmin)
             return res.status(401).send({message: 'User not authorized'})
         const film = await Show.findByPk(req.params.id);
