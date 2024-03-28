@@ -7,7 +7,7 @@ exports.getAllUsers = async (req, res) => {
         const allUsers = await User.findAll();
         return res.status(200).json(allUsers);
     } catch (error) {
-        return res.status(500).send({error: 'Error retrieving users', status: 500});
+        return res.status(500).send({message: 'Error returning users'});
     }
 }
 
@@ -16,7 +16,7 @@ exports.getUserById = async (req, res) => {
         const user = await User.findByPk(req.params.id);
         return res.status(200).json(user);
     } catch (error) {
-        return res.status(500).send({error: 'Error retrieving user', status: 500});
+        return res.status(500).send({message: 'Error returning user'});
     }
 }
 

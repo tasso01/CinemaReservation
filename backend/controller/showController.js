@@ -6,7 +6,7 @@ exports.getAllShows = async (req, res) => {
         const allShow = await Show.findAll();
         return res.status(200).json(allShow);
     } catch (error) {
-        return res.status(500).send({error: "Error retrieving shows", status: 500});
+        return res.status(500).send({message: "Error returning shows"});
     }
 }
 
@@ -15,7 +15,7 @@ exports.getShowById = async (req, res) => {
         const show = await Show.findByPk(req.params.id);
         return res.status(200).json(show);
     } catch (error) {
-        return res.status(500).send({error: 'Error retrieving show', status: 500});
+        return res.status(500).send({message: 'Error returning show'});
     }
 }
 
@@ -24,7 +24,7 @@ exports.getShowsByDate = async (req, res) => {
         const show = await Show.findAll({where: {date: req.params.date}});
         return res.status(200).json(show);
     } catch (error) {
-        return res.status(500).send({error: 'Error retrieving shows', status: 500});
+        return res.status(500).send({message: 'Error returning shows'});
     }
 }
 
@@ -33,7 +33,7 @@ exports.getShowsByHall = async (req, res) => {
         const show = await Show.findAll({where: {hallId: req.params.hall}});
         return res.status(200).json(show);
     } catch (error) {
-        return res.status(500).send({error: 'Error retrieving shows', status: 500});
+        return res.status(500).send({message: 'Error returning shows'});
     }
 }
 
@@ -43,7 +43,7 @@ exports.getShowsByFilm = async (req, res) => {
         const show = await Show.findAll({where: {filmId: req.params.film}});
         return res.status(200).json(show);
     } catch (error) {
-        return res.status(500).send({error: 'Error retrieving shows', status: 500});
+        return res.status(500).send({message: 'Error returning shows'});
     }
 }
 
@@ -56,9 +56,9 @@ exports.addShow = async (req, res) => {
             return res.status(401).send({message: 'User not authorized'})
         const show = await Show.create({date, price, hallId, filmId});
         await show.save();
-        return res.status(200).send({message: 'Show created', status: 200});
+        return res.status(200).send({message: 'Show created'});
     } catch (error) {
-        return res.status(500).send({error: 'Error creating show', status: 500});
+        return res.status(500).send({message: 'Error creating show'});
     }
 }
 
@@ -74,9 +74,9 @@ exports.updateShow = async (req, res) => {
         show.hallId = hallId;
         show.filmId = filmId;
         await show.save();
-        return res.status(200).send({message: 'Show updated', status: 200});
+        return res.status(200).send({message: 'Show updated'});
     } catch (error) {
-        return res.status(500).send({error: 'Error updating show', status: 500});
+        return res.status(500).send({message: 'Error updating show'});
     }
 }
 
