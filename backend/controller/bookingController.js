@@ -53,6 +53,9 @@ exports.updateBooking = async (req, res) => {
     const {seatId} = req.body;
     try {
         const booking = await Booking.findByPk(req.params.id);
+        const reqUserId = await userController.getIdByUsername(req.user.username);
+        if (reqUserId !== booking.userId)
+            return res.status(500).send({error: 'Non authorized operation', status: 500});
         booking.seatId = seatId;
         await booking.save();
         return res.status(200).send({message: 'Booking updated', status: 200});
@@ -64,6 +67,9 @@ exports.updateBooking = async (req, res) => {
 exports.removeBooking = async (req, res) => {
     try {
         const booking = await Booking.findByPk(req.params.id);
+        const reqUserId = await userController.getIdByUsername(req.user.username);
+        if (reqUserId !== booking.userId)
+            return res.status(500).send({error: 'Non authorized operation', status: 500});
         await booking.destroy();
         return res.status(200).send({message: 'Booking deleted', status: 200});
     } catch (error) {
