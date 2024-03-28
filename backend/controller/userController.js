@@ -57,3 +57,8 @@ exports.login = async (req, res) => {
 exports.logout = async (req, res) => {
     
 }
+
+exports.getIdByUsername = async (username) => {
+    const user = await User.findOne({where: {username: username}});
+    return user.id;
+}

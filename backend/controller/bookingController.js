@@ -1,5 +1,5 @@
 const Booking = require('../models/booking');
-const User = require('../models/user');
+const userController = require('../controller/userController');
 
 exports.getAllBookings = async (req, res) => {
     try {
@@ -38,8 +38,9 @@ exports.getBookingsByShow = async (req, res) => {
 }
 
 exports.addBooking = async (req, res) => {
-    const {userId, showId, seatId} = req.body;
+    const {showId, seatId} = req.body;
     try {
+        const userId = await userController.getIdByUsername(req.user.username);
         const booking = await Booking.create({userId, showId, seatId});
         await booking.save();
         return res.status(200).send({message: 'Booking created', status: 200});
