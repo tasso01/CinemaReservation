@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { environment } from '../../../environments/environment.development';
 import { AuthService } from '../../auth/auth.service';
 
 @Component({
