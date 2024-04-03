@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../../services/users.service';
 import { environment } from '../../../environments/environment.development';
 import { AuthService } from '../../auth/auth.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-register',
@@ -26,15 +27,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(){
-    this.authService.signUp({
-      username: this.registerForm.value.username,
-      //email: this.registerForm.value.email, 
-      password: this.registerForm.value.password
-    }
-      )
-    .subscribe((data) => {
-      console.log(data);
-    })
+    this.authService.signUp(this.registerForm.value)
   }
 }
 

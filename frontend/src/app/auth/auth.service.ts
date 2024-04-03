@@ -6,14 +6,12 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { catchError, first, map, tap } from 'rxjs';
 import { ErrorHandlerService } from './error-handler.service';
-import { Token } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 private readonly JWT_TOKEN = 'JWT_TOKEN';
-isLoggedIn = false;
 private jwtHelper: JwtHelperService;
 httpOptions: {headers: HttpHeaders} = {
   headers: new HttpHeaders(
@@ -41,7 +39,7 @@ isAdmin(){
 return !!this.getCurrentAccount()?.isAdmin;
 }
 
-signUp(user: Omit<User, 'id'>): void {
+signUp(user: Omit<User, 'id' | 'isAdmin'>): void {
  this.http.post<{token: string}>(`${environment.apiUrl}/api/user/register`, user, this.httpOptions)
  .pipe(
   first(),
@@ -50,7 +48,7 @@ signUp(user: Omit<User, 'id'>): void {
     localStorage.setItem(this.JWT_TOKEN, token);
     this.router.navigate(['/home'])
   }),
-  catchError(this.errorHandleService.handleError<void>('register'))
+  catchError(this.errorHandleService.handleError<string>('register'))
  )
  .subscribe();
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service'; // Servizio per gestire l'autenticazione dell'utente
 
@@ -8,15 +8,17 @@ import { AuthService } from './auth.service'; // Servizio per gestire l'autentic
 })
 export class AuthGuard {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router){}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    // Verifica se l'utente è autenticato
-    if (this.authService.isLoggedIn) {
-      return true; // Lascia l'utente navigare alla pagina
-    } else {
-      // Reindirizza l'utente alla pagina di login se non è autenticato
-      return this.router.parseUrl('login');
+  canActivate(route: ActivatedRouteSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    let path = route.toString();
+    if(this.authService.isAuthenticated() && (path.includes("login") || path.includes("register"))){
+      return this.router.createUrlTree(['/home']);
     }
+    if(!this.authService.isAuthenticated() && (path.includes("booking") || path.includes("profile"))){
+      return this.router.createUrlTree(['/login']);
+    }
+    return true;
   }
+  
 }
