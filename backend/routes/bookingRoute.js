@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const bookingController = require('../controller/bookingController');
-const mid = require('../middleware/mid');
+const { authenticateToken } = require('../authentication/jwt');
 
-router.get('/api/bookings/allBookings', middl, bookingController.getAllBookings);
-router.get('/api/bookings/bookingById/:id', bookingController.getBookingById);
-router.get('/api/bookings/bookingsByUser/:user', bookingController.getBookingsByUser);
-router.get('/api/bookings/bookingsByShow/:show', bookingController.getBookingsByShow);
-router.post('/api/bookings/addBooking', mid.checkAuth, bookingController.addBooking);
-router.put('/api/bookings/updateBooking/:id', mid.checkAuth, bookingController.updateBooking);
-router.delete('/api/bookings/removeBooking/:id', mid.checkAuth, bookingController.removeBooking);
+router.get('/bookings/allBookings', bookingController.getAllBookings);
+router.get('/bookings/bookingById/:id', bookingController.getBookingById);
+router.get('/bookings/bookingsByUser/:user', bookingController.getBookingsByUser);
+router.get('/bookings/bookingsByShow/:show', bookingController.getBookingsByShow);
+router.post('/bookings/addBooking', authenticateToken, bookingController.addBooking);
+router.put('/bookings/updateBooking/:id', authenticateToken, bookingController.updateBooking);
+router.delete('/bookings/removeBooking/:id', authenticateToken, bookingController.removeBooking);
 
 module.exports = router;

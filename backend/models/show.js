@@ -17,6 +17,10 @@ const Show = sequelize.define('Show', {
         type: DataTypes.FLOAT,
         allowNull: false
     },
+    freeSeats: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     hallId: {
         type: DataTypes.INTEGER,
         allowNull: false,
