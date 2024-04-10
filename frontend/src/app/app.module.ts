@@ -13,7 +13,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 
-import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
@@ -25,6 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { JwtInterceptorService } from './jwt/jwt-interceptor.service';
+import { AuthService } from './auth/auth.service';
+import { FilmService } from './services/film.service';
 
 
 @NgModule({
@@ -53,9 +54,10 @@ import { JwtInterceptorService } from './jwt/jwt-interceptor.service';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
+    AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
   ],
 })

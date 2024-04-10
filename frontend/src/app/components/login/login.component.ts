@@ -9,11 +9,10 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class LoginComponent implements OnInit{
   loginForm: FormGroup;
-
+  hide = true;
   constructor(private authService: AuthService) {
     this.loginForm = new FormGroup({
       username: new FormControl(['', [Validators.required]]),
-      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
   }

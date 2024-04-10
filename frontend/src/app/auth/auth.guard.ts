@@ -13,12 +13,12 @@ export class AuthGuard {
   canActivate(route: ActivatedRouteSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     let path = route.toString();
     if(this.authService.isAuthenticated() && (path.includes("login") || path.includes("register"))){
-      return this.router.createUrlTree(['/home']);
+      return this.router.navigate(['/home']);
     }
-    if(!this.authService.isAuthenticated() && (path.includes("booking") || path.includes("profile"))){
-      return this.router.createUrlTree(['/login']);
+    if(!this.authService.isAuthenticated()) {
+      if((path.includes("booking") || path.includes("profile")))
+        return this.router.navigate(['/login']);
     }
     return true;
   }
-  
 }

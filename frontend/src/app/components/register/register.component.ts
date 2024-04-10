@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UsersService } from '../../services/users.service';
-import { environment } from '../../../environments/environment.development';
 import { AuthService } from '../../auth/auth.service';
-import { User } from '../../models/user';
 
 @Component({
   selector: 'app-register',
@@ -12,12 +9,11 @@ import { User } from '../../models/user';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-
+  hide = true;
 
   constructor(private authService: AuthService) {
    this.registerForm = new FormGroup({
     username: new FormControl(['', [Validators.required]]),
-    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
 

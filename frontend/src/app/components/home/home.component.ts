@@ -5,7 +5,6 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { Film } from '../../models/film';
 import { ShowService } from '../../services/show.service';
 import { Show } from '../../models/show';
-import { error } from 'console';
 
 
 @Component({
@@ -20,7 +19,7 @@ show$!: Observable<Show[]>
 constructor(private router : Router, private filmService: FilmService, private show: ShowService){}
   
 ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    
   }
 
 persone = [

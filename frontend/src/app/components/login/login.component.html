@@ -1,20 +1,21 @@
-<h1>Effettua il login!!!</h1>
-
-<form [formGroup] = "loginForm" (ngSubmit)="onSubmit()">
-  <mat-form-field>
-    <p>Username</p>
-    <mat-label>Username</mat-label>
-    <input matInput type="username"  name=" username" formControlName = "username">
-  </mat-form-field>
-  <mat-form-field>
-    <p>Email</p>
-    <mat-label>Email</mat-label>
-    <input matInput type="email"  name=" email" formControlName = "email">
-  </mat-form-field>
-  <mat-form-field>
-    <p>Password</p>
-    <mat-label>Password</mat-label>
-    <input matInput type ="password" name="password" formControlName = "password">
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Loggati</button>
-</form>
+<div>
+  <h1>Effettua il login!!!</h1>
+  <form [formGroup] = "loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <label>Username</label>
+      <input matInput type="text" name="username" formControlName = "username">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <label>Password</label>
+      <input matInput [type]="hide ? 'password' : 'text'" name="password" formControlName = "password">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]= "loginForm.invalid">Accedi</button>
+    <p>Non hai un account?</p>
+    <a routerLink="/register" type="link-danger">Registrati</a>
+  </form>
+</div>
