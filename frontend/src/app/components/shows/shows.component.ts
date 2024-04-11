@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Film } from '../../models/film';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-shows',
@@ -6,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrl: './shows.component.scss'
 })
 export class ShowsComponent {
+
+  films: Film[] = [];
+
+  constructor(httpClient: HttpClient) {
+    httpClient.get<Film[]>(environment.baseUrl+"/films/allfilms").subscribe((filmsFromBackend) => {
+      this.films = filmsFromBackend;
+    })
+  }
 
 }
