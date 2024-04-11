@@ -6,4 +6,18 @@
   .example-spacer {
     flex: 1 1 auto;
   }
-  
+
+.example-icon{
+    background-color: black;
+    color: white;
+}
+
+mat-toolbar{
+  background-color: black;
+  color: white;
+}
+
+mat-list-item{
+  font-size: large;
+  border: 2px;
+}

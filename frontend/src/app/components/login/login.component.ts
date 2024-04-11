@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit{
   hide = true;
   constructor(private authService: AuthService) {
     this.loginForm = new FormGroup({
-      username: new FormControl(['', [Validators.required]]),
+      username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
   }
