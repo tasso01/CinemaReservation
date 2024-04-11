@@ -11,11 +11,11 @@ const userRoute = require('./routes/userRoute');
 
 app.use(express.json());
 
-app.use(bookingRoute);
-app.use(filmRoute);
-app.use(hallRoute);
-app.use(showRoute);
-app.use(userRoute);
+app.use('/api', bookingRoute);
+app.use('/api', filmRoute);
+app.use('/api', hallRoute);
+app.use('/api', showRoute);
+app.use('/api', userRoute);
 
 sequelize.sync({ force: false })
     .then(() => {console.log("Connessione al Database effettuata")})
