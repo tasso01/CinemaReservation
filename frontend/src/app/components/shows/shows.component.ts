@@ -12,7 +12,7 @@ export class ShowsComponent {
 
   films: Film[] = [];
 
-  constructor(httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) {
     httpClient.get<Film[]>(environment.baseUrl+"/films/allfilms").subscribe((filmsFromBackend) => {
       this.films = filmsFromBackend;
     })
