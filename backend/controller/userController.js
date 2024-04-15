@@ -29,7 +29,7 @@ exports.register =  async (req, res) => {
             return res.status(400).json({message: "Username already used"})
         const newUser = await User.create({username, password: hashedPassword});
         await newUser.save();
-        const token = generateAccessToken({username: username});
+        const token = generateAccessToken(newUser);
         res.status(201).json(token);
     } catch (error) {
         console.log(error);
@@ -46,7 +46,7 @@ exports.login = async (req, res) => {
         const validPassword = await comparePasswords(password, existingUser.password);
         if (!validPassword)
             return res.status(401).json({message: "Invalid username or password"})
-        const token = generateAccessToken({username: username});
+        const token = generateAccessToken(existingUser);
         res.status(201).json(token);
     } catch (error) {
         console.log(error);
