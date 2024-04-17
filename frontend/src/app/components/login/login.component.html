@@ -3,12 +3,12 @@
   <form [formGroup] = "loginForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Username</mat-label>
-      <label>Username</label>
+      <mat-label>Username</mat-label>
       <input matInput type="text" name="username" formControlName = "username">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <label>Password</label>
+      <mat-label>Password</mat-label>
       <input matInput [type]="hide ? 'password' : 'text'" name="password" formControlName = "password">
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

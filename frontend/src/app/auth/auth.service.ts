@@ -4,8 +4,9 @@ import { User } from '../models/user';
 import { environment } from '../../environments/environment.development';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
-import { catchError, first, map, tap } from 'rxjs';
+import { Observable, catchError, first, map, tap } from 'rxjs';
 import { ErrorHandlerService } from './error-handler.service';
+import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -39,22 +40,27 @@ isAdmin(){
 return !!this.getCurrentAccount()?.isAdmin;
 }
 
-signUp(user: Omit<User, 'id' | 'isAdmin'>): void {
- this.http.post<{token: string}>(`${environment.apiUrl}/api/user/register`, user, this.httpOptions)
+signUp(user: Omit<User, 'id' | 'isAdmin'>): Observable<any> {
+ return this.http.post<string>(`${environment.apiUrl}/api/user/register`, user, this.httpOptions)
  .pipe(
-  first(),
-  tap(tokenObject => {
-    const token = tokenObject.token;
+  tap(token => {
+    console.log(token);
     localStorage.setItem(this.JWT_TOKEN, token);
     this.router.navigate(['/home'])
   }),
   catchError(this.errorHandleService.handleError<string>('register'))
  )
- .subscribe();
 }
 
-logIn(username: Pick<User, "username">, password: Pick<User, "password">): void {
-  this.http.post<{token: string}>(`${environment.apiUrl}/api/user/login`, {username, password}, this.httpOptions)
+register(username: string, password: string): Observable<any>{
+  const url = environment.baseUrl+'/user/register'; // Assicurati che l'URL sia corretto
+  const body = { username, password };
+  this.router.navigate(['home']);
+  return this.http.post<any>(url, body);
+}
+
+/*logIn(username: Pick<User, "username">, password: Pick<User, "password">) {
+  return this.http.post<{token: string}>(`${environment.apiUrl}/api/user/login`, {username, password}, this.httpOptions)
   .pipe(
     first(),
     map(tokenObject => tokenObject.token),
@@ -63,8 +69,14 @@ logIn(username: Pick<User, "username">, password: Pick<User, "password">): void 
       this.router.navigate(['/home']);
     }),
   catchError(this.errorHandleService.handleError<string>("login")))
-  .subscribe();
-}
+}*/
+
+login(username: string, password: string): Observable<any> {
+    const url = environment.baseUrl+'/user/login'; // Assicurati che l'URL sia corretto
+    const body = { username, password };
+    this.router.navigate(['home']);
+    return this.http.post<any>(url, body);
+  }
 
 logOut(): void {
   localStorage.removeItem(this.JWT_TOKEN)
@@ -78,8 +90,8 @@ isTokenExpired(): boolean{
   }
   const isExpired = this.jwtHelper.isTokenExpired(token);
   if(isExpired){
-    return true
+    return true;
   }
-  return false
+  return false;
 }
 }

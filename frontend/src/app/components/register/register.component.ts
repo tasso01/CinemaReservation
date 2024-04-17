@@ -23,7 +23,13 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(){
-    this.authService.signUp(this.registerForm.value)
+    this.authService.register(this.registerForm.value.user, this.registerForm.value.password).subscribe(
+      response => {
+        console.log('Login effettuato con successo', response);
+        // Puoi reindirizzare l'utente o eseguire altre azioni
+        localStorage.setItem('JWT_TOKEN', response);
+      }
+    )
   }
 }
 

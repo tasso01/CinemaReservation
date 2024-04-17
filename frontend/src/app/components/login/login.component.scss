@@ -12,7 +12,7 @@ div {
   
   /* Stile per il titolo */
 h1 {
-    color: #000000;
+    color: white;
     font-size: 32px;
     margin: 0;
     align-self: auto;
@@ -51,6 +51,11 @@ button[type="submit"] {
     margin-top: 10px; /* Spazio sopra il pulsante */
     background-color: black;
     color: blanchedalmond;
+}
+
+mat-label{
+  font-size: large;
+  color: black;
 }
   
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,12 @@ export class LoginComponent implements OnInit{
    
   }
   onSubmit(){
-    this.authService.logIn(this.loginForm.value.username, this.loginForm.value.password)
+    this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(
+      response => {
+        console.log('Login effettuato con successo', response);
+        // Puoi reindirizzare l'utente o eseguire altre azioni
+        localStorage.setItem('JWT_TOKEN', response);
+      },
+    );
   }
 }

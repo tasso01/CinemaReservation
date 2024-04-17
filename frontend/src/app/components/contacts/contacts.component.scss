@@ -1,0 +1,19 @@
+.example-card {
+    max-width: 400px;
+    display: flexbox;
+  }
+  
+  .example-header-image {
+    background-image: url('/assets/image/indirizzo.png');
+    background-size: cover;
+  }
+
+  .example1-header-image {
+    background-image: url('/assets/image/telefono.jpg');
+    background-size: cover;
+  }
+
+  .example2-header-image {
+    background-image: url('/assets/image/posta.jpg');
+    background-size: cover;
+  }
