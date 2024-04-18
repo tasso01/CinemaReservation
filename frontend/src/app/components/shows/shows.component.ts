@@ -10,12 +10,7 @@ import { environment } from '../../../environments/environment';
 })
 export class ShowsComponent {
 
-  films: Film[] = [];
-
-  constructor(private httpClient: HttpClient) {
-    httpClient.get<Film[]>(environment.baseUrl+"/films/allfilms").subscribe((filmsFromBackend) => {
-      this.films = filmsFromBackend;
-    })
+  constructor() {
   }
 
 }
