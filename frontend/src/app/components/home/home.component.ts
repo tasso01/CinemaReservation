@@ -22,13 +22,13 @@ constructor(private router : Router, private filmService: FilmService, private s
 films: Film[] = [];
 
 ngOnInit(): void {
-  this.httpClient.get<Film[]>(environment.baseUrl+"/films/allfilms").subscribe((filmsFromBackend) => {
+  this.filmService.getAllFilms().subscribe((filmsFromBackend) => {
     this.films = filmsFromBackend;
   })
 }
 
 getFilms(): void {
-  this.film$ = this.filmService.getFilms()
+  this.film$ = this.filmService.getAllFilms()
   .pipe(
     catchError(error => {
       this.router.navigate(['/404']);
