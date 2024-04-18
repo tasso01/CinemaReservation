@@ -27,12 +27,6 @@ ngOnInit(): void {
   })
 }
 
-persone = [
-  {nome: 'Luca', cognome: 'rossi'},
-  {nome: 'anna', cognome: 'rossi'},
-  {nome: 'lorenzo', cognome: 'rossi'},
-]
-
 getFilms(): void {
   this.film$ = this.filmService.getFilms()
   .pipe(

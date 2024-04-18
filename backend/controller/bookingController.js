@@ -22,7 +22,7 @@ exports.getBookingById = async (req, res) => {
 
 exports.getBookingsByUser = async (req, res) => {
     try {
-        const booking = await Booking.findAll({where: {userId: req.params.user}});
+        const booking = await Booking.findAll({where: {userId: req.user.id}});
         return res.status(200).json(booking);
     } catch (error) {
         return res.status(500).send({error: 'Error returning booking'});

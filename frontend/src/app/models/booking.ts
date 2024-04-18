@@ -1,4 +1,4 @@
-export class Show{
+export class Booking{
     id: number;
     seats: number;
     price: number;

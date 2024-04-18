@@ -4,7 +4,7 @@ const { authenticateToken } = require('../authentication/jwt');
 
 router.get('/bookings/allBookings', bookingController.getAllBookings);
 router.get('/bookings/bookingById/:id', bookingController.getBookingById);
-router.get('/bookings/bookingsByUser/:user', bookingController.getBookingsByUser);
+router.get('/bookings/bookingsByUser', authenticateToken, bookingController.getBookingsByUser);
 router.get('/bookings/bookingsByShow/:show', bookingController.getBookingsByShow);
 router.post('/bookings/addBooking', authenticateToken, bookingController.addBooking);
 router.put('/bookings/updateBooking/:id', authenticateToken, bookingController.updateBooking);
