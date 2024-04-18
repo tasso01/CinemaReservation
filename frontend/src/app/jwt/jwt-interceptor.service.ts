@@ -13,7 +13,7 @@ export class JwtInterceptorService implements HttpInterceptor {
   constructor(private authService: AuthService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('JWT_TOKEN');
-    const isApiUrl = req.url.startsWith(environment.apiUrl);
+    const isApiUrl = req.url.startsWith(environment.baseUrl);
     if(token && isApiUrl){
       req = req.clone({setHeaders: {Authorization: `Bearer ${token}`}
       });

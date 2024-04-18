@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(){
-    this.authService.register(this.registerForm.value.user, this.registerForm.value.password).subscribe(
+    this.authService.register(this.registerForm.value.username, this.registerForm.value.password).subscribe(
       response => {
         console.log('Login effettuato con successo', response);
         // Puoi reindirizzare l'utente o eseguire altre azioni

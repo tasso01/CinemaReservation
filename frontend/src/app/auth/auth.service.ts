@@ -40,16 +40,10 @@ isAdmin(){
 return !!this.getCurrentAccount()?.isAdmin;
 }
 
-signUp(user: Omit<User, 'id' | 'isAdmin'>): Observable<any> {
- return this.http.post<string>(`${environment.apiUrl}/api/user/register`, user, this.httpOptions)
- .pipe(
-  tap(token => {
-    console.log(token);
-    localStorage.setItem(this.JWT_TOKEN, token);
-    this.router.navigate(['/home'])
-  }),
-  catchError(this.errorHandleService.handleError<string>('register'))
- )
+signUp(username: string, password: string): Observable<any> {
+  const url = environment.baseUrl+'/user/register'; // Assicurati che l'URL sia corretto
+  const body = { username, password };
+ return this.http.post<string>(url, body)
 }
 
 register(username: string, password: string): Observable<any>{
