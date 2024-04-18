@@ -22,6 +22,10 @@ const Film = sequelize.define('Film', {
     duration: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 });
 
