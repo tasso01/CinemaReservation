@@ -12,8 +12,8 @@ export class FilmService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getFilms(): Observable<Film[]> {
-    const url = `${environment.apiUrl}/api/films`
+  getAllFilms(): Observable<Film[]> {
+    const url = `${environment.baseUrl}/films/allFilms`
     return this.http.get<Film[]>(url);
   }
 
