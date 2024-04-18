@@ -54,11 +54,11 @@ exports.login = async (req, res) => {
     }
 }
 
-exports.logout = async (req, res) => {
-    
-}
-
-exports.getIdByUsername = async (username) => {
-    const user = await User.findOne({where: {username: username}});
-    return user.id;
+exports.getProfile = async (req, res) => {
+    try {
+        return res.status(200).json(req.user);
+    } catch (error) {
+        console.log(error);
+        res.status(500);
+    }
 }

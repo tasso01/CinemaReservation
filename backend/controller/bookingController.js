@@ -41,7 +41,7 @@ exports.getBookingsByShow = async (req, res) => {
 exports.addBooking = async (req, res) => {
     const {seats, showId} = req.body;
     try {
-        const userId = await userController.getIdByUsername(req.user.username);
+        const userId = req.user.id;
         const show = await Show.findByPk(showId);
         if (seats > show.freeSeats)
             return res.status(500).send({message: 'Seats not available'});
@@ -60,7 +60,7 @@ exports.updateBooking = async (req, res) => {
     const {seats} = req.body;
     try {
         const booking = await Booking.findByPk(req.params.id);
-        const reqUserId = await userController.getIdByUsername(req.user.username);
+        const reqUserId = await req.user.id;
         if (reqUserId !== booking.userId)
             return res.status(401).send({message: 'Non authorized operation'});
         const show = await Show.findByPk(booking.showId);
@@ -80,7 +80,7 @@ exports.updateBooking = async (req, res) => {
 exports.removeBooking = async (req, res) => {
     try {
         const booking = await Booking.findByPk(req.params.id);
-        const reqUserId = await userController.getIdByUsername(req.user.username);
+        const reqUserId = await req.user.id;
         if (reqUserId !== booking.userId)
             return res.status(401).send({message: 'Non authorized operation'});
         const show = await Show.findByPk(booking.showId);
