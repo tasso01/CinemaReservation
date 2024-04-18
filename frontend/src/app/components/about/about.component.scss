@@ -1,0 +1,37 @@
+#div1 .white-container {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    max-width: 80%;
+  }
+  
+
+  #div1 .white-container p {
+    font-family: Arial, sans-serif; 
+    font-weight: bold;
+    color: black;
+    font-size: x-large;
+    line-height: 1.5;
+    text-align: justify;
+  }
+
+  #div2{
+    width: 100%;
+    height: 60%;
+    margin-top: 5px;
+  }
+
+  p{
+    font-size: large;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  img{
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  

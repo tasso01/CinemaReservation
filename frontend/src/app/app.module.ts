@@ -26,6 +26,7 @@ import { BookingComponent } from './components/booking/booking.component';
 import { JwtInterceptorService } from './jwt/jwt-interceptor.service';
 import { AuthService } from './auth/auth.service';
 import { FilmService } from './services/film.service';
+import { AppComponent } from './app.component';
 
 
 @NgModule({

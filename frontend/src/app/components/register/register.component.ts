@@ -13,8 +13,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authService: AuthService) {
    this.registerForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    username: new FormControl(null, Validators.required),
+    password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
     });
 
     
