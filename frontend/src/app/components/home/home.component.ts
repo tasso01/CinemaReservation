@@ -17,13 +17,17 @@ export class HomeComponent implements OnInit {
 film$!: Observable<Film[]>
 show$!: Observable<Show[]>
 
-constructor(private router : Router, private filmService: FilmService, private show: ShowService, private httpClient: HttpClient){}
+constructor(private router : Router, private filmService: FilmService, private showService: ShowService, private httpClient: HttpClient){}
   
 films: Film[] = [];
+shows: Show[] = [];
 
 ngOnInit(): void {
   this.filmService.getAllFilms().subscribe((filmsFromBackend) => {
     this.films = filmsFromBackend;
+  })
+  this.showService.getShows().subscribe(showBack => {
+    this.shows = showBack;
   })
 }
 
@@ -38,7 +42,7 @@ getFilms(): void {
 }
 
 getShows(): void {
-  this.show$ = this.show.getShows()
+  this.show$ = this.showService.getShows()
   .pipe(
     catchError(error => {
       this.router.navigate(['/404']);

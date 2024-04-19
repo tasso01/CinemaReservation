@@ -6,11 +6,15 @@
     </mat-card-header>
     <img mat-card-image src={{film.image}}>
     <mat-card-content>
+      <p></p>
       <p>
         {{film.description}}
+        </p>
+        <p>
+        Durata: {{film.duration}} min.
       </p>
     </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit">Vai alla prenotazione</button>
+    <mat-card-actions *ngFor="let show of shows">
+        <button *ngIf="show.filmId == film.id" mat-raised-button color="primary" type="submit">Prenotati per {{show.date}}</button>
     </mat-card-actions>
   </mat-card>
