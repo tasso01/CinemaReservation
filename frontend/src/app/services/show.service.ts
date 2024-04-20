@@ -12,12 +12,12 @@ export class ShowService {
   constructor(private http: HttpClient) { }
 
   getShows(): Observable<Show[]> {
-    const url = `${environment.apiUrl}/api/shows`
+    const url = `${environment.baseUrl}/shows/allShows`
     return this.http.get<Show[]>(url);
   }
 
   getShow(idShow: number): Observable<Show>{
-    const url = `${environment.apiUrl}/api/shows/${idShow}`
+    const url = `${environment.baseUrl}/shows/${idShow}`
     return this.http.get<Show>(url);
   }
 }
