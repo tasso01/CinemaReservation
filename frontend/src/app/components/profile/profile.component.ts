@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     let token = localStorage.getItem('JWT_TOKEN');
 
-    this.httpClient.get<Booking[]>(environment.baseUrl+"/bookings/allBookings").subscribe((bookingsByUser) => {
+    this.httpClient.get<Booking[]>(environment.baseUrl+"/bookings/bookingsByUser").subscribe((bookingsByUser) => {
       this.bookings = bookingsByUser;
     })
   }
