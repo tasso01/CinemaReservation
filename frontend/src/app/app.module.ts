@@ -59,7 +59,7 @@ import { AppComponent } from './app.component';
   ],
   providers: [
     AuthService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
+    //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
   ],
 })
 export class AppModule { }

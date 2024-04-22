@@ -7,6 +7,7 @@ import { ShowService } from '../../services/show.service';
 import { Show } from '../../models/show';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
+import { BookingService } from '../../services/booking.service';
 
 @Component({
   selector: 'app-home',
@@ -16,8 +17,9 @@ import { environment } from '../../../environments/environment.development';
 export class HomeComponent implements OnInit {
 film$!: Observable<Film[]>
 show$!: Observable<Show[]>
-
-constructor(private router : Router, private filmService: FilmService, private showService: ShowService, private httpClient: HttpClient){}
+posti$! : number;
+constructor(private router : Router, private filmService: FilmService, private showService: ShowService, 
+  private httpClient: HttpClient, private bookingService: BookingService){}
   
 films: Film[] = [];
 shows: Show[] = [];
@@ -50,4 +52,17 @@ getShows(): void {
     })
   );
 }
+
+addBooking(show: Show): void { 
+  const postiString =window.prompt("Inserisci i posti da prenotare: ");
+  const posti = postiString !== null ? parseInt(postiString, 10) : 1;
+  console.log(show.id);
+  console.log(posti);
+  this.bookingService.addBooking(posti, show.id).subscribe(
+    response => {
+      console.log('Login effettuato con successo', response);
+    })
+  
+}
+
 }
