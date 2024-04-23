@@ -13,6 +13,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
+import {MatDividerModule} from '@angular/material/divider';
 
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -57,7 +58,8 @@ import { AppComponent } from './app.component';
     MatIconModule,
     MatCardModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatDividerModule
   ],
   providers: [
     AuthService,

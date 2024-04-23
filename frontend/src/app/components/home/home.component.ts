@@ -28,7 +28,7 @@ ngOnInit(): void {
   this.filmService.getAllFilms().subscribe((filmsFromBackend) => {
     this.films = filmsFromBackend;
   })
-  this.showService.getShows().subscribe(showBack => {
+  this.showService.getAllShows().subscribe(showBack => {
     this.shows = showBack;
   })
 }
@@ -44,7 +44,7 @@ getFilms(): void {
 }
 
 getShows(): void {
-  this.show$ = this.showService.getShows()
+  this.show$ = this.showService.getAllShows()
   .pipe(
     catchError(error => {
       this.router.navigate(['/404']);

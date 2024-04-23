@@ -11,7 +11,7 @@ export class ShowService {
 
   constructor(private http: HttpClient) { }
 
-  getShows(): Observable<Show[]> {
+  getAllShows(): Observable<Show[]> {
     const url = `${environment.baseUrl}/shows/allShows`
     return this.http.get<Show[]>(url);
   }

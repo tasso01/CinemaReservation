@@ -10,29 +10,12 @@ import { Observable, catchError, throwError } from 'rxjs';
 @Component({
   selector: 'app-shows',
   templateUrl: './shows.component.html',
-  styleUrl: './shows.component.scss'
+  styleUrl: './shows.component.scss',
 })
-export class ShowsComponent implements OnInit{
-  private film$!: Observable<Film[]>
+export class ShowsComponent implements OnInit {
+  constructor(
 
-  constructor(private filmService: FilmService, private httpClient: HttpClient, private router : Router) {
-  }  
+  ) {}
 
-  films: Film[] = [];
-
-  ngOnInit(): void {
-    this.filmService.getAllFilms().subscribe((filmsFromBackend) => {
-      this.films = filmsFromBackend;
-    })
-  }
-  
-  getFilms(): void {
-    this.film$ = this.filmService.getAllFilms()
-    .pipe(
-      catchError(error => {
-        this.router.navigate(['/404']);
-        return throwError(() => error);
-      })
-    );
-  }
+  ngOnInit(): void {}
 }
