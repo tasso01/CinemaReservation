@@ -17,8 +17,8 @@ export class FilmService {
     return this.http.get<Film[]>(url);
   }
 
-  getFilm(id: number): Observable<Film> {
-    const url = `${environment.apiUrl}/api/films/${id}`
+  getFilmById(id: number): Observable<Film> {
+    const url = `${environment.baseUrl}/films/filmById/${id}`
     return this.http.get<Film>(url);
   }
 

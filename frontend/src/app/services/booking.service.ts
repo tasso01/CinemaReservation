@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
+import { Booking } from '../models/booking';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,9 @@ export class BookingService {
     return this.http.post(url, body);
   }
 
+  getBookingByUser(): Observable<Booking[]> {
+    const url = `${environment.baseUrl}/bookings/bookingsByUser`
+    return this.http.get<Booking[]>(url);
+  }
 
 }

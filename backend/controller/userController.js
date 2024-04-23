@@ -13,7 +13,7 @@ exports.getAllUsers = async (req, res) => {
 
 exports.getUserById = async (req, res) => {
     try {
-        const user = await User.findByPk(req.params.id);
+        const user = await User.findByPk(req.user.id);
         return res.status(200).json(user);
     } catch (error) {
         return res.status(500).send({message: 'Error returning user'});

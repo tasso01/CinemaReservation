@@ -12,4 +12,5 @@ import { authInterceptor } from './jwt/auth.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(),
   provideHttpClient(withFetch(), withInterceptors([authInterceptor])),]
+  //provideHttpClient(withFetch())]
 };
