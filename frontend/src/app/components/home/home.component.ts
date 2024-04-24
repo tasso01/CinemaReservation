@@ -12,57 +12,60 @@ import { BookingService } from '../../services/booking.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
-film$!: Observable<Film[]>
-show$!: Observable<Show[]>
-posti$! : number;
-constructor(private router : Router, private filmService: FilmService, private showService: ShowService, 
-  private httpClient: HttpClient, private bookingService: BookingService){}
-  
-films: Film[] = [];
-shows: Show[] = [];
+  film$!: Observable<Film[]>;
+  show$!: Observable<Show[]>;
+  posti$!: number;
+  constructor(
+    private router: Router,
+    private filmService: FilmService,
+    private showService: ShowService,
+    private bookingService: BookingService
+  ) {}
 
-ngOnInit(): void {
-  this.filmService.getAllFilms().subscribe((filmsFromBackend) => {
-    this.films = filmsFromBackend;
-  })
-  this.showService.getAllShows().subscribe(showBack => {
-    this.shows = showBack;
-  })
-}
+  films: Film[] = [];
+  shows: Show[] = [];
 
-getFilms(): void {
-  this.film$ = this.filmService.getAllFilms()
-  .pipe(
-    catchError(error => {
-      this.router.navigate(['/404']);
-      return throwError(() => error);
-    })
-  );
-}
+  ngOnInit(): void {
+    this.filmService.getAllFilms().subscribe((filmsFromBackend) => {
+      this.films = filmsFromBackend;
+    });
+    this.showService.getAllShows().subscribe((showBack) => {
+      this.shows = showBack;
+    });
+  }
 
-getShows(): void {
-  this.show$ = this.showService.getAllShows()
-  .pipe(
-    catchError(error => {
-      this.router.navigate(['/404']);
-      return throwError(( ) => error);
-    })
-  );
-}
+  getFilms(): void {
+    this.film$ = this.filmService.getAllFilms().pipe(
+      catchError((error) => {
+        this.router.navigate(['/404']);
+        return throwError(() => error);
+      })
+    );
+  }
 
-addBooking(show: Show): void { 
-  const postiString =window.prompt("Inserisci i posti da prenotare: ");
-  const posti = postiString !== null ? parseInt(postiString, 10) : 1;
-  console.log(show.id);
-  console.log(posti);
-  this.bookingService.addBooking(posti, show.id).subscribe(
-    response => {
+  getShows(): void {
+    this.show$ = this.showService.getAllShows().pipe(
+      catchError((error) => {
+        this.router.navigate(['/404']);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  addBooking(show: Show): void {
+    const postiString = window.prompt('Inserisci i posti da prenotare: ');
+    const posti = postiString !== null ? parseInt(postiString, 10) : 1;
+    console.log(show.id);
+    console.log(posti);
+    this.bookingService.addBooking(posti, show.id).subscribe((response) => {
       console.log('Login effettuato con successo', response);
-    })
-  
-}
+    });
+  }
 
+  getShowsByFilm(filmId: number): Show[] {
+    return this.shows.filter((show) => show.filmId === filmId);
+  }
 }
