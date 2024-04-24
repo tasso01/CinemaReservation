@@ -22,4 +22,9 @@ export class BookingService {
     return this.http.get<Booking[]>(url);
   }
 
+  deleteBooking(bookingId: number) {
+    const url = `${environment.baseUrl}/bookings/removeBooking/${bookingId}`
+    return this.http.delete(url)
+  }
+
 }
