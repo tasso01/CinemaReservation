@@ -25,6 +25,7 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { BookingComponent } from './components/booking/booking.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { JwtInterceptorService } from './jwt/jwt-interceptor.service';
 import { AuthService } from './auth/auth.service';
 import { FilmService } from './services/film.service';
@@ -42,6 +43,7 @@ import { AppComponent } from './app.component';
     ProfileComponent,
     ContactsComponent,
     BookingComponent,
+    AdminComponent
   ],
   imports: [
     CommonModule,

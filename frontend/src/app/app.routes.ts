@@ -5,7 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AboutComponent } from './components/about/about.component';
 import { ShowsComponent } from './components/shows/shows.component';
 import { ProfileComponent } from './components/profile/profile.component';
-
+import { AdminComponent } from './components/admin/admin.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { HomeComponent } from './components/home/home.component';
 import { BookingComponent } from './components/booking/booking.component';
@@ -20,6 +20,7 @@ export const routes: Routes = [
         {path: 'about', component: AboutComponent},
         {path: 'contactus', component: ContactsComponent},
         {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+        {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]}
     ]},
     {path: 'home', component: HomeComponent},
     {path: 'booking', component: BookingComponent, },
@@ -28,4 +29,5 @@ export const routes: Routes = [
     {path: 'about', component: AboutComponent},
     {path: 'shows', component: ShowsComponent},
     {path: 'profile', component: ProfileComponent},
+    {path: 'admin', component: AdminComponent}
 ];

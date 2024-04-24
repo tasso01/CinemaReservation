@@ -19,6 +19,10 @@ export class AuthGuard {
       if((path.includes("booking") || path.includes("profile")))
         return this.router.navigate(['/login']);
     }
+    if(!this.authService.isAdmin() && path.includes("admin")) {
+      console.log('not-admin')
+      return this.router.navigate(['/login'])
+    }
     return true;
   }
 }
