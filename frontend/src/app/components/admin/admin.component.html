@@ -1,1 +1,35 @@
-<p>admin works!</p>
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+    <mat-tab label="Gestisci Film">
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+            <mat-tab label="Aggiungi Film">
+                Aggiungi Film
+            </mat-tab>
+            <mat-tab label="Modifica Film">
+                Modifica Film
+            </mat-tab>
+            <mat-tab label="Elimina Film">
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let film of films">
+                        {{film.title}}
+                    </mat-list-item>
+                </mat-list>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-tab>
+    <mat-tab label="Gestisci Spettacoli">
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+            <mat-tab label="Aggiungi Spettacolo">
+                Aggiungi Spettacolo</mat-tab>
+            <mat-tab label="Modifica Spettacolo">Modifica Spettacolo
+
+            </mat-tab>
+            <mat-tab label="Elimina Spettacolo">
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let show of shows">
+                        {{getFilmTitle(show.filmId)}}
+                    </mat-list-item>
+                </mat-list>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-tab>
+</mat-tab-group>
