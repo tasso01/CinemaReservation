@@ -22,9 +22,9 @@ export class FilmService {
     return this.http.get<Film>(url);
   }
 
-  addFilm(body: {}) {
-    const url = `${environment.baseUrl}/films/addFilm`
-    this.http.post(url, body)
+  addFilm(film: Film): Observable<any>{
+    const url = `${environment.apiUrl}/api/films`
+    return this.http.post(url, film);
   }
 
   deleteFilm(idFilm: number) {
