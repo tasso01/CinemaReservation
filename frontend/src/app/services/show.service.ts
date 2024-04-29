@@ -20,4 +20,9 @@ export class ShowService {
     const url = `${environment.baseUrl}/shows/showById/${idShow}`
     return this.http.get<Show>(url);
   }
+
+  deleteShow(showId: number) {
+    const url = `${environment.baseUrl}/shows/removeShow/${showId}`
+    return this.http.delete(url);
+  }
 }

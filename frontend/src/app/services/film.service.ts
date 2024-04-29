@@ -27,9 +27,9 @@ export class FilmService {
     return this.http.post(url, film);
   }
 
-  deleteFilm(idFilm: number): Observable<any>{
-    const url = `${environment.apiUrl}/api/films/${idFilm}`
-    return this.http.delete<any>(url);
+  deleteFilm(idFilm: number) {
+    const url = `${environment.baseUrl}/films/removeFilm/${idFilm}`
+    return this.http.delete(url);
   }
 
   canAdmin(){

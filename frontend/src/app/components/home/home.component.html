@@ -13,8 +13,8 @@
     </p>
   </mat-card-content>
   <mat-card-actions *ngFor="let show of getShowsByFilm(film.id)">
-    <button mat-raised-button color="success" type="submit" (click)="addBooking(show)">
-      Prenotati per: {{show.date | date:'dd/MM/yyyy - HH:mm'}}</button>
+    <button mat-raised-button color="primary" type="submit" (click)="addBooking(show)">
+      Prenotati per: {{show.date | date:'dd/MM/yyyy - HH:mm'}}<br>Posti disponibili: {{show.freeSeats}}</button>
   </mat-card-actions>
   <mat-divider></mat-divider>
 </mat-card>
