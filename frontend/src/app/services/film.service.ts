@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { Film } from '../models/film';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilmService {
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router) { }
 
   getAllFilms(): Observable<Film[]> {
     const url = `${environment.baseUrl}/films/allFilms`
@@ -25,6 +26,7 @@ export class FilmService {
   addFilm(title: string, director: string, description: string, duration: number, image: string): Observable<any>{
     const url = `${environment.baseUrl}/films/addFilm`
     const body = {title, director, description, duration, image}
+    this.router.navigate(['home']);
     return this.http.post(url, body);
   }
 
