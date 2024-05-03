@@ -32,4 +32,15 @@ export class RegisterComponent implements OnInit {
         localStorage.setItem('JWT_TOKEN', response);
       });
   }
+
+  onPasswordKeyDown(event: KeyboardEvent) {
+    // Controlla se l'utente ha premuto il tasto Enter (codice 13)
+    if (event.key === 'Enter') {
+      // Previeni l'azione predefinita (premendo il tasto invio)
+      event.preventDefault();
+
+      // Invia il form
+      this.onSubmit();
+    }
+  }
 }

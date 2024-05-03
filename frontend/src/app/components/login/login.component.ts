@@ -30,4 +30,14 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  onPasswordKeyDown(event: KeyboardEvent) {
+    // Controlla se l'utente ha premuto il tasto Enter (codice 13)
+    if (event.key === 'Enter') {
+      // Previeni l'azione predefinita (premendo il tasto invio)
+      event.preventDefault();
+
+      // Invia il form
+      this.onSubmit();
+    }
+  }
 }
