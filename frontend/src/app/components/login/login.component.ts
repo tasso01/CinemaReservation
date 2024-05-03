@@ -5,27 +5,29 @@ import { AuthService } from '../../auth/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   hide = true;
-  constructor(private authService: AuthService) {
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
     this.loginForm = new FormGroup({
       username: new FormControl(null, Validators.required),
-      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
+      password: new FormControl(null, Validators.required),
     });
   }
-  ngOnInit(): void {
-   
-  }
-  onSubmit(){
-    this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(
-      response => {
+
+  onSubmit() {
+    this.authService
+      .login(this.loginForm.value.username, this.loginForm.value.password)
+      .subscribe((response) => {
         console.log('Login effettuato con successo', response);
         // Puoi reindirizzare l'utente o eseguire altre azioni
         localStorage.setItem('JWT_TOKEN', response);
-      },
-    );
+      });
   }
+
 }

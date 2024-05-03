@@ -15,6 +15,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
 
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -29,7 +32,6 @@ import { BookingComponent } from './components/booking/booking.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { JwtInterceptorService } from './jwt/jwt-interceptor.service';
 import { AuthService } from './auth/auth.service';
-import { FilmService } from './services/film.service';
 import { AppComponent } from './app.component';
 
 
@@ -64,7 +66,9 @@ import { AppComponent } from './app.component';
     MatTableModule,
     MatDividerModule,
     MatTabsModule,
-    
+    MatInputModule,
+    MatDatepickerModule,
+    MatSelectModule
   ],
   providers: [
     AuthService,

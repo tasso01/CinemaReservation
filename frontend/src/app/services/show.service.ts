@@ -21,6 +21,12 @@ export class ShowService {
     return this.http.get<Show>(url);
   }
 
+  addShow(date: Date, price: number, hallId: number, filmId: number): Observable<any> {
+    const url = `${environment.baseUrl}/shows/addShow`
+    const body = {date, price, hallId, filmId}
+    return this.http.post(url, body)
+  }
+
   deleteShow(showId: number) {
     const url = `${environment.baseUrl}/shows/removeShow/${showId}`
     return this.http.delete(url);
