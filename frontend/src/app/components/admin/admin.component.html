@@ -63,9 +63,10 @@
                         <mat-label>Prezzo</mat-label>
                         <input matInput type="number" formControlName="price">
                     </mat-form-field><br>
-                    <!-- <mat-form-field>
+
+                    <mat-form-field>
                         <mat-label>Sala</mat-label>
-                        <mat-select [(value)]="selectedHallId">
+                        <mat-select formControlName="hall">
                             <mat-option *ngFor="let hall of halls" [value]="hall.id">
                                 Sala: {{ hall.number }} - Capacità: {{ hall.capacity }}
                             </mat-option>
@@ -73,20 +74,22 @@
                     </mat-form-field><br>
                     <mat-form-field>
                         <mat-label>Film</mat-label>
-                        <mat-select [(value)]="selectedFilmId">
+                        <mat-select formControlName="film">
                             <mat-option *ngFor="let film of films" [value]="film.id">
                                 {{ film.title }}
                             </mat-option>
                         </mat-select>
-                    </mat-form-field><br> -->
-                    <mat-form-field>
+                    </mat-form-field><br>
+
+                    <!-- <mat-form-field>
                         <mat-label>Sala</mat-label>
                         <input matInput type="number" formControlName="hallId">
                     </mat-form-field><br>
                     <mat-form-field>
                         <mat-label>Film</mat-label>
                         <input matInput type="number" formControlName="filmId">
-                    </mat-form-field><br>
+                    </mat-form-field><br> -->
+
                     <button mat-flat-button color="primary" style="float: left;" type="submit"
                         [disabled]="!addShowForm.valid">Aggiungi Spettacolo</button>
                 </form>

@@ -50,8 +50,8 @@ export class AdminComponent implements OnInit {
     this.addShowForm = new FormGroup({
       date: new FormControl(null, Validators.required),
       price: new FormControl(null, Validators.required),
-      hallId: new FormControl(null, Validators.required),
-      filmId: new FormControl(null, Validators.required)
+      hall: new FormControl(null, Validators.required),
+      film: new FormControl(null, Validators.required),
     });
   }
 
@@ -74,8 +74,8 @@ export class AdminComponent implements OnInit {
       .addShow(
         this.addShowForm.value.date,
         this.addShowForm.value.price,
-        this.addShowForm.value.hallId,
-        this.addShowForm.value.filmId
+        this.addShowForm.value.hall,
+        this.addShowForm.value.film
       )
       .subscribe((response) => {
         console.log('spettacolo aggiunto con successo', response);
