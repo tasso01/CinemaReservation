@@ -21,9 +21,6 @@ export class ProfileComponent implements OnInit {
   shows: Show[] = [];
   films: Film[] = [];
   halls: Hall[] = [];
-  showsApp: { [key: string]: any } = {};
-  filmsApp: { [key: string]: any } = {};
-  hallsApp: { [key: string]: any } = {};
   columns: string[] = ['FILM', 'HALL', 'SEATS', 'PRICE', 'DATE'];
 
   constructor(
