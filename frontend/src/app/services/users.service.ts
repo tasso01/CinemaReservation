@@ -5,18 +5,18 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
-  url = environment.apiUrl + '/users'
-  constructor(private http: HttpClient) {   }
-  
-  getAllUsers(body: {}){
-    return this.http.get(this.url + '/allUsers', body) 
-  }
+  constructor(private http: HttpClient) {}
 
   getUserById() {
-    const url = `${environment.baseUrl}/users/userById`
-    return this.http.get<User>(url)
+    const url = `${environment.baseUrl}/users/userById`;
+    return this.http.get<User>(url);
+  }
+
+  getUserProfile() {
+    const url = `${environment.baseUrl}/users/profile`;
+    return this.http.get<User>(url);
   }
 }

@@ -6,7 +6,6 @@ import { Show } from '../../models/show';
 import { HallService } from '../../services/hall.service';
 import { Hall } from '../../models/hall';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { response } from 'express';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
@@ -21,8 +20,6 @@ export class AdminComponent implements OnInit {
   films: Film[] = [];
   shows: Show[] = [];
   halls: Hall[] = [];
-  selectedHallId: number;
-  selectedFilmId: number;
 
   constructor(
     private filmService: FilmService,

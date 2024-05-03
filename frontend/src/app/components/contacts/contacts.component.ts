@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
-  styleUrl: './contacts.component.scss'
+  styleUrl: './contacts.component.scss',
 })
-export class ContactsComponent {
-
-}
+export class ContactsComponent {}

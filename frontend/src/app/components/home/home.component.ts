@@ -58,10 +58,8 @@ export class HomeComponent implements OnInit {
   addBooking(show: Show): void {
     const postiString = window.prompt('Inserisci i posti da prenotare: ');
     const posti = postiString !== null ? parseInt(postiString, 10) : 1;
-    console.log(show.id);
-    console.log(posti);
     this.bookingService.addBooking(posti, show.id).subscribe((response) => {
-      console.log('Login effettuato con successo', response);
+      console.log('prenotazione effettuata con successo', response);
     });
   }
 

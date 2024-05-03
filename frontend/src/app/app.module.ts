@@ -1,23 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
-import {MatTableModule} from '@angular/material/table';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatInputModule} from '@angular/material/input';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -26,14 +27,9 @@ import { ShowsComponent } from './components/shows/shows.component';
 import { AboutComponent } from './components/about/about.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { JwtInterceptorService } from './jwt/jwt-interceptor.service';
-import { AuthService } from './auth/auth.service';
-import { AppComponent } from './app.component';
-
 
 @NgModule({
   declarations: [
@@ -46,7 +42,7 @@ import { AppComponent } from './app.component';
     ProfileComponent,
     ContactsComponent,
     BookingComponent,
-    AdminComponent
+    AdminComponent,
   ],
   imports: [
     CommonModule,
@@ -68,11 +64,8 @@ import { AppComponent } from './app.component';
     MatTabsModule,
     MatInputModule,
     MatDatepickerModule,
-    MatSelectModule
+    MatSelectModule,
   ],
-  providers: [
-    AuthService,
-    //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
-  ],
+  providers: [],
 })
-export class AppModule { }
+export class AppModule {}

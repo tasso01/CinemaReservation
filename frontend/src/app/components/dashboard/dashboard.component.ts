@@ -5,19 +5,16 @@ import { AuthService } from '../../auth/auth.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
-  
-  constructor(private router: Router, private authservice: AuthService){
+  constructor(private router: Router, private authservice: AuthService) {}
 
+  redirectToLogin() {
+    this.router.navigate(['login']);
   }
 
-  redirectToLogin(){
-    this.router.navigate(['login']); 
-  }
-
-  redirectToLogout(){
+  redirectToLogout() {
     this.authservice.logOut();
   }
 }

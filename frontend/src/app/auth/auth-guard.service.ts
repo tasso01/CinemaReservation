@@ -6,11 +6,17 @@ export const AuthGuardService: CanActivateFn = (
   route: ActivatedRouteSnapshot
 ) => {
   let path = route.toString();
-  if((path.includes("login") || path.includes("register")) && inject(AuthService).isAuthenticated())
+  if (
+    (path.includes('login') || path.includes('register')) &&
+    inject(AuthService).isAuthenticated()
+  )
     return inject(Router).createUrlTree(['/home']);
 
-  if(!(inject(AuthService).isAuthenticated()) && (path.includes("profile") || path.includes("booking"))){
-      return inject(Router).createUrlTree(['/login']);
+  if (
+    !inject(AuthService).isAuthenticated() &&
+    (path.includes('profile') || path.includes('booking'))
+  ) {
+    return inject(Router).createUrlTree(['/login']);
   }
 
   return true;

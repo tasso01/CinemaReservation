@@ -7,36 +7,40 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FilmService {
-
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   getAllFilms(): Observable<Film[]> {
-    const url = `${environment.baseUrl}/films/allFilms`
+    const url = `${environment.baseUrl}/films/allFilms`;
     return this.http.get<Film[]>(url);
   }
 
   getFilmById(id: number): Observable<Film> {
-    const url = `${environment.baseUrl}/films/filmById/${id}`
+    const url = `${environment.baseUrl}/films/filmById/${id}`;
     return this.http.get<Film>(url);
   }
 
-  addFilm(title: string, director: string, description: string, duration: number, image: string): Observable<any>{
-    const url = `${environment.baseUrl}/films/addFilm`
-    const body = {title, director, description, duration, image}
+  addFilm(
+    title: string,
+    director: string,
+    description: string,
+    duration: number,
+    image: string
+  ): Observable<any> {
+    const url = `${environment.baseUrl}/films/addFilm`;
+    const body = { title, director, description, duration, image };
     this.router.navigate(['home']);
     return this.http.post(url, body);
   }
 
   deleteFilm(idFilm: number) {
-    const url = `${environment.baseUrl}/films/removeFilm/${idFilm}`
+    const url = `${environment.baseUrl}/films/removeFilm/${idFilm}`;
     return this.http.delete(url);
   }
-
-  canAdmin(){
-    return this.authService.isAdmin()
-  }
-
 }

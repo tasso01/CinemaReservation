@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service'; // Servizio per gestire l'autenticazione dell'utente
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class AuthGuard {
     }
     if(!this.authService.isAdmin() && path.includes("admin")) {
       console.log('not-admin')
-      return this.router.navigate(['/login'])
+      return this.router.navigate(['/login']);
     }
     return true;
   }

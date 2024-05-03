@@ -45,25 +45,16 @@
     <mat-tab label="Gestisci Spettacoli">
         <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
             <mat-tab label="Aggiungi Spettacolo">
-
                 <form [formGroup]="addShowForm" (ngSubmit)="addShow()">
                     <mat-form-field>
                         <mat-label>Data</mat-label>
                         <input matInput type="datetime" formControlName="date">
                         <mat-hint>YYYY-MM-DD HH:MM:SS</mat-hint>
                     </mat-form-field><br>
-                    <!-- <mat-form-field>
-                        <mat-label>Data Spettacolo</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="date">
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field><br> -->
                     <mat-form-field>
                         <mat-label>Prezzo</mat-label>
                         <input matInput type="number" formControlName="price">
                     </mat-form-field><br>
-
                     <mat-form-field>
                         <mat-label>Sala</mat-label>
                         <mat-select formControlName="hall">
@@ -80,20 +71,9 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field><br>
-
-                    <!-- <mat-form-field>
-                        <mat-label>Sala</mat-label>
-                        <input matInput type="number" formControlName="hallId">
-                    </mat-form-field><br>
-                    <mat-form-field>
-                        <mat-label>Film</mat-label>
-                        <input matInput type="number" formControlName="filmId">
-                    </mat-form-field><br> -->
-
                     <button mat-flat-button color="primary" style="float: left;" type="submit"
                         [disabled]="!addShowForm.valid">Aggiungi Spettacolo</button>
                 </form>
-
             </mat-tab>
             <mat-tab label="Modifica Spettacolo">
                 Modifica Spettacolo

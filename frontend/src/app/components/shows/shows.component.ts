@@ -13,9 +13,7 @@ import { Observable, catchError, throwError } from 'rxjs';
   styleUrl: './shows.component.scss',
 })
 export class ShowsComponent implements OnInit {
-  constructor(
-
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }
