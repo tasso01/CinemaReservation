@@ -8,4 +8,4 @@ async function comparePasswords(a, b) {
     return await bcrypt.compare(a, b);
 }
 
-module.exports = {hashPassword, comparePasswords}
+module.exports = { hashPassword, comparePasswords }

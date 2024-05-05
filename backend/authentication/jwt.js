@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-
 dotenv.config();
 
 function generateAccessToken(user) {
@@ -21,7 +20,7 @@ function authenticateToken(req, res, next) {
         if (err) return res.sendStatus(403);
         req.user = user;
         next();
-    })        
+    })
 }
 
-module.exports = {generateAccessToken, authenticateToken};
+module.exports = { generateAccessToken, authenticateToken };
