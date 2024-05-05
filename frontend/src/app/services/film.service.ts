@@ -12,18 +12,12 @@ import { Router } from '@angular/router';
 export class FilmService {
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
     private router: Router
   ) {}
 
   getAllFilms(): Observable<Film[]> {
     const url = `${environment.baseUrl}/films/allFilms`;
     return this.http.get<Film[]>(url);
-  }
-
-  getFilmById(id: number): Observable<Film> {
-    const url = `${environment.baseUrl}/films/filmById/${id}`;
-    return this.http.get<Film>(url);
   }
 
   addFilm(

@@ -7,93 +7,36 @@ exports.getAllShows = async (req, res) => {
         const allShow = await Show.findAll();
         return res.status(200).json(allShow);
     } catch (error) {
-        return res.status(500).send({message: "Error returning shows"});
+        return res.status(500).send({ message: "Error returning shows" });
     }
 }
-
-exports.getShowById = async (req, res) => {
-    try {
-        const show = await Show.findByPk(req.params.id);
-        return res.status(200).json(show);
-    } catch (error) {
-        return res.status(500).send({message: 'Error returning show'});
-    }
-}
-
-exports.getShowsByDate = async (req, res) => {
-    try {
-        const show = await Show.findAll({where: {date: req.params.date}});
-        return res.status(200).json(show);
-    } catch (error) {
-        return res.status(500).send({message: 'Error returning shows'});
-    }
-}
-
-exports.getShowsByHall = async (req, res) => {
-    try {
-        const show = await Show.findAll({where: {hallId: req.params.hall}});
-        return res.status(200).json(show);
-    } catch (error) {
-        return res.status(500).send({message: 'Error returning shows'});
-    }
-}
-
-
-exports.getShowsByFilm = async (req, res) => {
-    try {
-        const show = await Show.findAll({where: {filmId: req.params.film}});
-        return res.status(200).json(show);
-    } catch (error) {
-        return res.status(500).send({message: 'Error returning shows'});
-    }
-}
-
 
 exports.addShow = async (req, res) => {
-    const {date, price, hallId, filmId} = req.body;
+    const { date, price, hallId, filmId } = req.body;
     try {
-        const user = await User.findOne({where: {username: req.user.username}});
+        const user = await User.findOne({ where: { username: req.user.username } });
         if (!user.isAdmin)
-            return res.status(401).send({message: 'User not authorized'})
+            return res.status(401).send({ message: 'User not authorized' })
         const freeSeats = await getFreeSeats(hallId);
         console.log(freeSeats);
-        const show = await Show.create({date, price, freeSeats, hallId, filmId});
+        const show = await Show.create({ date, price, freeSeats, hallId, filmId });
         await show.save();
-        return res.status(200).send({message: 'Show created'});
+        return res.status(200).send({ message: 'Show created' });
     } catch (error) {
-        return res.status(500).send({message: 'Error creating show'});
-    }
-}
-
-exports.updateShow = async (req, res) => {
-    const {date, price, hallId, filmId} = req.body;
-    try {
-        const user = await User.findOne({where: {username: req.user.username}});
-        if (!user.isAdmin)
-            return res.status(401).send({message: 'User not authorized'})
-        const show = await Show.findByPk(req.params.id);
-        show.date = date;
-        show.price = price;
-        show.hallId = hallId;
-        show.filmId = filmId;
-        show.freeSeats = await getFreeSeats(hallId);
-        await show.save();
-        return res.status(200).send({message: 'Show updated'});
-    } catch (error) {
-        return res.status(500).send({message: 'Error updating show'});
+        return res.status(500).send({ message: 'Error creating show' });
     }
 }
 
 exports.removeShow = async (req, res) => {
     try {
-        const user = await User.findOne({where: {username: req.user.username}});
+        const user = await User.findOne({ where: { username: req.user.username } });
         if (!user.isAdmin)
-            return res.status(401).send({message: 'User not authorized'})
+            return res.status(401).send({ message: 'User not authorized' })
         const film = await Show.findByPk(req.params.id);
         await film.destroy();
-        return res.status(200).send({message: 'Show deleted', status: 200});
+        return res.status(200).send({ message: 'Show deleted', status: 200 });
     } catch (error) {
-        return res.status(500).send({error: 'Error deleting show', status: 500});
+        return res.status(500).send({ error: 'Error deleting show', status: 500 });
     }
 }
 

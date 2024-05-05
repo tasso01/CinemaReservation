@@ -16,11 +16,6 @@ export class ShowService {
     return this.http.get<Show[]>(url);
   }
 
-  getShowById(idShow: number): Observable<Show> {
-    const url = `${environment.baseUrl}/shows/showById/${idShow}`;
-    return this.http.get<Show>(url);
-  }
-
   addShow(
     date: Date,
     price: number,

@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
         this.registerForm.value.password
       )
       .subscribe((response) => {
-        console.log('Login effettuato con successo', response);
+        console.log('Registrazione e Login effettuato con successo', response);
         localStorage.setItem('JWT_TOKEN', response);
       });
   }

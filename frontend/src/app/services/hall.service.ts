@@ -14,9 +14,4 @@ export class HallService {
     const url = `${environment.baseUrl}/halls/allHalls`;
     return this.http.get<Hall[]>(url);
   }
-
-  getHallById(id: number): Observable<Hall> {
-    const url = `${environment.baseUrl}/halls/hallById/${id}`;
-    return this.http.get<Hall>(url);
-  }
 }
