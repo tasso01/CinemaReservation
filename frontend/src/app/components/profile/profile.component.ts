@@ -6,9 +6,9 @@ import { Show } from '../../models/show';
 import { FilmService } from '../../services/film.service';
 import { HallService } from '../../services/hall.service';
 import { User } from '../../models/user';
-import { UsersService } from '../../services/users.service';
 import { Film } from '../../models/film';
 import { Hall } from '../../models/hall';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +16,7 @@ import { Hall } from '../../models/hall';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
-  user!: User;
+  user: User;
   bookings: Booking[] = [];
   shows: Show[] = [];
   films: Film[] = [];
@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
     private showService: ShowService,
     private filmService: FilmService,
     private hallService: HallService,
-    private userService: UsersService
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -44,25 +44,23 @@ export class ProfileComponent implements OnInit {
     this.hallService.getAllHalls().subscribe((hallsFromBackend) => {
       this.halls = hallsFromBackend;
     });
-    this.userService.getUserById().subscribe((userFromBackend) => {
-      this.user = userFromBackend;
-    });
+    this.user = this.authService.getCurrentAccount();
   }
 
   getShowDate(showId: number): Date {
     const show = this.shows.find((s) => s.id === showId);
-    return show.date;
+    return show ? show.date : undefined;
   }
 
   getFilmTitle(showId: number): string {
     const show = this.shows.find((s) => s.id === showId);
     const film = this.films.find((f) => f.id === show.filmId);
-    return film.title;
+    return film ? film.title : '';
   }
 
   getHallNumber(showId: number): number {
     const show = this.shows.find((s) => s.id === showId);
     const hall = this.halls.find((h) => h.id === show.hallId);
-    return hall.number;
+    return hall ? hall.number : undefined;
   }
 }
