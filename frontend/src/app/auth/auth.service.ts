@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return !!localStorage.getItem(this.JWT_TOKEN) && !this.isTokenExpired();
+    return localStorage.getItem(this.JWT_TOKEN) && !this.isTokenExpired();
   }
 
   getCurrentAccount(): User | null {
@@ -50,7 +50,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    const url = environment.baseUrl + '/user/login'; // Assicurati che l'URL sia corretto
+    const url = environment.baseUrl + '/user/login';
     const body = { username, password };
     this.router.navigate(['home']);
     return this.http.post<any>(url, body);

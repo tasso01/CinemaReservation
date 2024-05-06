@@ -15,7 +15,6 @@ export const routes: Routes = [
     {path: '', component: DashboardComponent, children: [
         {path: '', redirectTo: 'home', pathMatch: 'full'},
         {path: 'home',  component: HomeComponent},
-        {path: 'shows', component: ShowsComponent},
         {path: 'booking', component: BookingComponent, canActivate: [AuthGuard] },
         {path: 'about', component: AboutComponent},
         {path: 'contactus', component: ContactsComponent},
@@ -27,7 +26,6 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
     {path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     {path: 'about', component: AboutComponent},
-    {path: 'shows', component: ShowsComponent},
     {path: 'profile', component: ProfileComponent},
     {path: 'admin', component: AdminComponent}
 ];
