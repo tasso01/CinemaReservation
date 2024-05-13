@@ -1,0 +1,10 @@
+<div class="title">
+    <strong>{{user.username | uppercase}}</strong>, qui puoi cancellare le prenotazioni che hai effettuato:
+</div>
+<mat-divider></mat-divider>
+<mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let booking of bookings">
+        {{getFilmTitle(booking.showId)}} - {{booking.seats}} posti - {{ getShowDate(booking.showId) | date:'dd/MM/yyyy ore HH:mm' }}
+        <button mat-flat-button color="warn" (click)="deleteBooking(booking.id)">CANCELLA</button></mat-list-item>
+    <mat-divider></mat-divider>
+</mat-list>

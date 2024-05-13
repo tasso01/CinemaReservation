@@ -1,0 +1,64 @@
+/* Stile generale per il contenitore */
+div {
+  display: flexbox;
+  justify-content: center;
+  align-content: auto;
+  height: 100%;
+  background-image: url('/assets/image/universe1.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+}
+
+/* Stile per il titolo */
+h1 {
+  color: white;
+  font-size: 32px;
+  margin: 0;
+  align-self: auto;
+}
+
+/* Stile per il form */
+form {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 40%;
+  /* Larghezza del form */
+  height: auto;
+  margin-top: 5px;
+}
+
+p {
+  margin-top: 30px;
+  font-size: large;
+}
+
+a {
+  background-color: #000000;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Stile per il campo di input */
+mat-form-field {
+  display: flexbox;
+  /* Visualizzazione a blocco */
+  margin-bottom: 5px;
+  /* Spazio tra i campi */
+}
+
+/* Stile per il pulsante di submit */
+button[type="submit"] {
+  width: 100%;
+  /* Larghezza del pulsante */
+  margin-top: 10px;
+  /* Spazio sopra il pulsante */
+  background-color: black;
+  color: blanchedalmond;
+}
+
+mat-label {
+  font-size: large;
+  color: black;
+}

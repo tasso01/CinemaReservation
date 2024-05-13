@@ -1,31 +1,23 @@
 const express = require('express');
 const app = express();
-
+app.use(express.json());
 const sequelize = require('./database/connection');
 
 const bookingRoute = require('./routes/bookingRoute');
 const filmRoute = require('./routes/filmRoute');
 const hallRoute = require('./routes/hallRoute');
-const seatRoute = require('./routes/seatRoute');
 const showRoute = require('./routes/showRoute');
 const userRoute = require('./routes/userRoute');
 
-app.use(express.json());
-
-app.use(bookingRoute);
-app.use(filmRoute);
-app.use(hallRoute);
-app.use(seatRoute);
-app.use(showRoute);
-app.use(userRoute);
+app.use('/api', bookingRoute);
+app.use('/api', filmRoute);
+app.use('/api', hallRoute);
+app.use('/api', showRoute);
+app.use('/api', userRoute);
 
 sequelize.sync({ force: false })
     .then(() => {console.log("Connessione al Database effettuata")})
     .catch((error) => {console.log("Connessione al Database fallita"+error.message)
-});
-
-app.get('/', (req, res) => {
-    res.send('Home page')
 });
 
 app.listen(3000, () => {

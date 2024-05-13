@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } =  require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../database/connection');
 const Hall = require('./hall');
 const Film = require('./film');
@@ -15,6 +15,10 @@ const Show = sequelize.define('Show', {
     },
     price: {
         type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    freeSeats: {
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     hallId: {

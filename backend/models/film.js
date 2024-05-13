@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } =  require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../database/connection');
 
 const Film = sequelize.define('Film', {
@@ -21,6 +21,10 @@ const Film = sequelize.define('Film', {
     },
     duration: {
         type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    image: {
+        type: DataTypes.STRING,
         allowNull: false
     }
 });
